@@ -1,0 +1,1016 @@
+[gd_scene load_steps=15 format=3 uid="uid://g6nhj8bg2nyg"]
+
+[ext_resource type="Script" path="res://menus/title_screen.gd" id="1_nk0m6"]
+[ext_resource type="Theme" uid="uid://o5p7cglq6qn" path="res://cards/theme_card.tres" id="2_hgoyr"]
+[ext_resource type="Script" path="res://menus/title_screen_label.gd" id="3_ddsui"]
+[ext_resource type="AudioStream" uid="uid://dmui6oom7dln4" path="res://sounds/snd_card_slot.mp3" id="4_ctmeh"]
+[ext_resource type="AudioStream" uid="uid://dalfryh2ppojr" path="res://sounds/snd_card_0.mp3" id="5_c41gr"]
+[ext_resource type="AudioStream" uid="uid://orpq4vk6qamt" path="res://sounds/sfx_intro_0.mp3" id="6_dvapt"]
+[ext_resource type="AudioStream" uid="uid://bsv7ye3jrjuvo" path="res://sounds/sfx_intro_1.mp3" id="7_m0076"]
+
+[sub_resource type="Animation" id="Animation_tgtej"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("title_label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 32)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("title_label/fake_card:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(516, 32)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("title_label/fake_card2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1364, 32)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("title_label/fake_card3:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(703, 209)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("title_label/fake_card4:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1103, 209)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("title_label/fake_card5:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1235, 209)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("title_label:text")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Random Numbers
+Guaranteed!"]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("title_label/fake_title_label:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("title_label/fake_title_label:text")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["R    ndom Numb    r"]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("title_label/fake_title_label:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("title_label/snd_card_slot:playing")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("title_label/snd_card_0:playing")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("sfx_intro_0:playing")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("sfx_intro_1:playing")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("title_label:rotation")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("title_label/fake_card:visible")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("title_label/fake_card2:visible")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("title_label/fake_card3:visible")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("title_label/fake_card4:visible")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("title_label/fake_card5:visible")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("title_label/fake_slot:visible")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/21/type = "value"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("title_label/fake_slot2:visible")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/22/type = "value"
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/path = NodePath("title_label/fake_slot3:visible")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/23/type = "value"
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/path = NodePath("title_label/fake_slot4:visible")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/24/type = "value"
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/path = NodePath("title_label/fake_slot5:visible")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_sekcu"]
+resource_name = "idle"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("title_label:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1, 3),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [0.0436332, -0.0436332]
+}
+
+[sub_resource type="Animation" id="Animation_nufty"]
+resource_name = "start"
+length = 6.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("title_label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4.75, 4.8, 4.85, 4.9, 4.95, 5, 5.05, 5.1, 5.15, 5.2, 5.25, 5.3, 5.35, 5.4, 5.45, 5.5, 5.55, 5.6, 5.65, 5.8, 5.95, 6.3),
+"transitions": PackedFloat32Array(1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 2, 0.5, 1),
+"update": 0,
+"values": [Vector2(0, 362), Vector2(0, 362), Vector2(3, 362), Vector2(-5, 362), Vector2(5, 362), Vector2(-10, 362), Vector2(10, 362), Vector2(-10, 362), Vector2(10, 362), Vector2(-13, 362), Vector2(13, 362), Vector2(-15, 362), Vector2(15, 362), Vector2(-15, 362), Vector2(15, 362), Vector2(-15, 362), Vector2(15, 362), Vector2(-15, 362), Vector2(15, 362), Vector2(0, 362), Vector2(0, 426), Vector2(0, 362), Vector2(0, 32)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("title_label/fake_card:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.1, 1.4),
+"transitions": PackedFloat32Array(1, 0.189465, 1, 7.72748, 1),
+"update": 0,
+"values": [Vector2(-159, -406), Vector2(-159, -406), Vector2(516, 0), Vector2(516, 0), Vector2(516, 32)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("title_label/fake_card2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2.15, 2.65, 2.75, 3.05),
+"transitions": PackedFloat32Array(1, 0.189465, 1, 7.72748, 1),
+"update": 0,
+"values": [Vector2(1271, -592), Vector2(1271, -592), Vector2(1364, 0), Vector2(1364, 0), Vector2(1364, 32)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("title_label/fake_card3:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 3.8, 4.3, 4.75, 5, 5.6),
+"transitions": PackedFloat32Array(1, 0.189465, 1, 3.99999, 25.1067, 1),
+"update": 0,
+"values": [Vector2(-152, 669), Vector2(-152, 669), Vector2(703, 177), Vector2(703, 177), Vector2(703, 161), Vector2(703, 209)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("title_label/fake_card4:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 3.9, 4.4, 4.75, 5, 5.6),
+"transitions": PackedFloat32Array(1, 0.189465, 1, 3.99999, 25.1067, 1),
+"update": 0,
+"values": [Vector2(878, 833), Vector2(878, 833), Vector2(1103, 177), Vector2(1103, 177), Vector2(1103, 161), Vector2(1103, 209)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("title_label/fake_card5:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 4, 4.5, 4.75, 5, 5.6),
+"transitions": PackedFloat32Array(1, 0.189465, 1, 3.99999, 25.1067, 1),
+"update": 0,
+"values": [Vector2(2147, 364), Vector2(2147, 364), Vector2(1235, 177), Vector2(1235, 177), Vector2(1235, 161), Vector2(1235, 209)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("title_label:text")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 5.65),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": ["", "Random Numbers
+Guaranteed!"]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("title_label/fake_title_label:text")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(1.4, 3.05),
+"transitions": PackedFloat32Array(0, 0),
+"update": 1,
+"values": ["R    ndom", "R    ndom Numb    rs"]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("title_label/fake_title_label:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(1.4, 3.05),
+"transitions": PackedFloat32Array(0, 0),
+"update": 0,
+"values": [Vector2(-289, 0), Vector2(35, 0)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("title_label/fake_title_label:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 1.4, 5.65),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("title_label/snd_card_slot:playing")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(1.4, 3.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("title_label/snd_card_0:playing")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0.5, 2.15, 3.8, 3.9, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, true, true, true, true]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("sfx_intro_0:playing")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(4.65),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("sfx_intro_1:playing")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(5.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("title_label/fake_card:visible")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0, 5.65),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("title_label/fake_card2:visible")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0, 5.65),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("title_label/fake_card3:visible")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0, 5.65),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("title_label/fake_card4:visible")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0, 5.65),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("title_label/fake_card5:visible")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0, 5.65),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("title_label/fake_slot:visible")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(0, 5.65),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("title_label/fake_slot2:visible")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(0, 5.65),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/21/type = "value"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("title_label/fake_slot3:visible")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/keys = {
+"times": PackedFloat32Array(0, 5.65),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/22/type = "value"
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/path = NodePath("title_label/fake_slot4:visible")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/keys = {
+"times": PackedFloat32Array(0, 5.65),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/23/type = "value"
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/path = NodePath("title_label/fake_slot5:visible")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/keys = {
+"times": PackedFloat32Array(0, 5.65),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/24/type = "value"
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/path = NodePath("title_label:rotation")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/25/type = "value"
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/path = NodePath("buttons/HBoxContainer:visible")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/26/type = "value"
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/path = NodePath("buttons/AnimationPlayer:current_animation")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/keys = {
+"times": PackedFloat32Array(6.4),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"show"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xvfe5"]
+_data = {
+"RESET": SubResource("Animation_tgtej"),
+"idle": SubResource("Animation_sekcu"),
+"start": SubResource("Animation_nufty")
+}
+
+[sub_resource type="Animation" id="Animation_xuith"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HBoxContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HBoxContainer:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HBoxContainer:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(710, 527)]
+}
+
+[sub_resource type="Animation" id="Animation_hv6ag"]
+resource_name = "show"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HBoxContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HBoxContainer:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HBoxContainer:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(710, 560), Vector2(710, 527)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("..:playingIntro")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xf81d"]
+_data = {
+"RESET": SubResource("Animation_xuith"),
+"show": SubResource("Animation_hv6ag")
+}
+
+[node name="title_screen" type="Node2D"]
+script = ExtResource("1_nk0m6")
+
+[node name="title_label" type="Label" parent="."]
+offset_top = 32.0
+offset_right = 1920.0
+offset_bottom = 474.0
+pivot_offset = Vector2(960, 178)
+theme = ExtResource("2_hgoyr")
+theme_override_constants/shadow_offset_y = 12
+theme_override_font_sizes/font_size = 128
+text = "Random Numbers
+Guaranteed!"
+horizontal_alignment = 1
+script = ExtResource("3_ddsui")
+
+[node name="fake_title_label" type="Label" parent="title_label"]
+visible = false
+layout_mode = 0
+offset_right = 1921.0
+offset_bottom = 178.0
+theme = ExtResource("2_hgoyr")
+theme_override_constants/shadow_offset_y = 12
+theme_override_font_sizes/font_size = 128
+text = "R    ndom Numb    r"
+horizontal_alignment = 1
+
+[node name="fake_slot" type="Panel" parent="title_label"]
+visible = false
+layout_mode = 0
+offset_left = 497.0
+offset_top = 2.0
+offset_right = 576.0
+offset_bottom = 123.0
+scale = Vector2(1.5, 1.5)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_hgoyr")
+
+[node name="fake_slot2" type="Panel" parent="title_label"]
+visible = false
+layout_mode = 0
+offset_left = 1345.0
+offset_top = 2.0
+offset_right = 1424.0
+offset_bottom = 123.0
+scale = Vector2(1.5, 1.5)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_hgoyr")
+
+[node name="fake_slot3" type="Panel" parent="title_label"]
+visible = false
+layout_mode = 0
+offset_left = 684.0
+offset_top = 179.0
+offset_right = 763.0
+offset_bottom = 300.0
+scale = Vector2(1.5, 1.5)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_hgoyr")
+
+[node name="fake_slot4" type="Panel" parent="title_label"]
+visible = false
+layout_mode = 0
+offset_left = 1084.0
+offset_top = 179.0
+offset_right = 1163.0
+offset_bottom = 300.0
+scale = Vector2(1.5, 1.5)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_hgoyr")
+
+[node name="fake_slot5" type="Panel" parent="title_label"]
+visible = false
+layout_mode = 0
+offset_left = 1216.0
+offset_top = 179.0
+offset_right = 1295.0
+offset_bottom = 300.0
+scale = Vector2(1.5, 1.5)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_hgoyr")
+
+[node name="fake_card" type="Panel" parent="title_label"]
+visible = false
+layout_mode = 0
+offset_left = 516.0
+offset_top = 32.0
+offset_right = 595.0
+offset_bottom = 153.0
+scale = Vector2(1.5, 1.5)
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_hgoyr")
+metadata/_edit_group_ = true
+
+[node name="number" type="Label" parent="title_label/fake_card"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "4"
+
+[node name="fake_card2" type="Panel" parent="title_label"]
+visible = false
+layout_mode = 0
+offset_left = 1364.0
+offset_top = 32.0
+offset_right = 1443.0
+offset_bottom = 153.0
+scale = Vector2(1.5, 1.5)
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_hgoyr")
+metadata/_edit_group_ = true
+
+[node name="number" type="Label" parent="title_label/fake_card2"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "3"
+
+[node name="fake_card3" type="Panel" parent="title_label"]
+visible = false
+layout_mode = 0
+offset_left = 703.0
+offset_top = 209.0
+offset_right = 782.0
+offset_bottom = 330.0
+scale = Vector2(1.5, 1.5)
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_hgoyr")
+metadata/_edit_group_ = true
+
+[node name="number" type="Label" parent="title_label/fake_card3"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "4"
+
+[node name="fake_card4" type="Panel" parent="title_label"]
+visible = false
+layout_mode = 0
+offset_left = 1103.0
+offset_top = 209.0
+offset_right = 1182.0
+offset_bottom = 330.0
+scale = Vector2(1.5, 1.5)
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_hgoyr")
+metadata/_edit_group_ = true
+
+[node name="number" type="Label" parent="title_label/fake_card4"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "3"
+
+[node name="fake_card5" type="Panel" parent="title_label"]
+visible = false
+layout_mode = 0
+offset_left = 1235.0
+offset_top = 209.0
+offset_right = 1314.0
+offset_bottom = 330.001
+scale = Vector2(1.5, 1.5)
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_hgoyr")
+metadata/_edit_group_ = true
+
+[node name="number" type="Label" parent="title_label/fake_card5"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "3"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="title_label"]
+root_node = NodePath("../..")
+autoplay = "start"
+libraries = {
+"": SubResource("AnimationLibrary_xvfe5")
+}
+
+[node name="snd_card_slot" type="AudioStreamPlayer" parent="title_label"]
+stream = ExtResource("4_ctmeh")
+
+[node name="snd_card_0" type="AudioStreamPlayer" parent="title_label"]
+stream = ExtResource("5_c41gr")
+
+[node name="sfx_intro_0" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_dvapt")
+
+[node name="sfx_intro_1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_m0076")
+
+[node name="buttons" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("2_hgoyr")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="buttons"]
+layout_mode = 0
+offset_left = 710.0
+offset_top = 527.0
+offset_right = 1210.0
+offset_bottom = 998.0
+alignment = 1
+metadata/_edit_group_ = true
+
+[node name="play" type="Button" parent="buttons/HBoxContainer"]
+custom_minimum_size = Vector2(312, 189)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+text = "Play"
+metadata/_edit_group_ = true
+
+[node name="instructions" type="Button" parent="buttons/HBoxContainer"]
+custom_minimum_size = Vector2(500, 189)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+text = "Instructions"
+metadata/_edit_group_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="buttons"]
+libraries = {
+"": SubResource("AnimationLibrary_xf81d")
+}
+
+[connection signal="animation_finished" from="title_label/AnimationPlayer" to="title_label" method="_on_animation_player_animation_finished"]
+[connection signal="pressed" from="buttons/HBoxContainer/play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="buttons/HBoxContainer/instructions" to="." method="_on_instructions_pressed"]

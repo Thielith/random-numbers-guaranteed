@@ -1,0 +1,40 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://c6tpno3tqiocj"
+path="res://.godot/imported/VDL-V7Gothic B.ttf-04cd7422958e64832570249f5002e721.fontdata"
+
+[deps]
+
+source_file="res://ui/VDL-V7Gothic B.ttf"
+dest_files=["res://.godot/imported/VDL-V7Gothic B.ttf-04cd7422958e64832570249f5002e721.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=false
+multichannel_signed_distance_field=false
+msdf_pixel_range=8
+msdf_size=48
+allow_system_fallback=true
+force_autohinter=false
+hinting=1
+subpixel_positioning=1
+oversampling=0.0
+Fallbacks=null
+fallbacks=[Object(SystemFont,"resource_local_to_scene":false,"resource_name":"","font_names":PackedStringArray(),"font_italic":false,"font_weight":400,"font_stretch":100,"antialiasing":1,"generate_mipmaps":false,"allow_system_fallback":true,"force_autohinter":false,"hinting":1,"subpixel_positioning":1,"multichannel_signed_distance_field":false,"msdf_pixel_range":16,"msdf_size":48,"oversampling":0.0,"fallbacks":Array[Font]([]),"script":null)
+, Resource("res://ui/seguiemj.ttf")]
+Compress=null
+compress=true
+preload=[{
+"chars": [],
+"glyphs": [],
+"name": "New Configuration",
+"size": Vector2i(16, 0),
+"variation_embolden": 0.0
+}]
+language_support={}
+script_support={}
+opentype_features={}

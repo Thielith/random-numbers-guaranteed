@@ -1,0 +1,342 @@
+[gd_scene load_steps=16 format=3 uid="uid://1vxyjh06pv0c"]
+
+[ext_resource type="Script" path="res://game.gd" id="1_v1oa5"]
+[ext_resource type="PackedScene" uid="uid://bflai8tmoma1t" path="res://ui/hud.tscn" id="2_e86e4"]
+[ext_resource type="Script" path="res://cards/trash_can.gd" id="2_enlsn"]
+[ext_resource type="Theme" uid="uid://o5p7cglq6qn" path="res://cards/theme_card.tres" id="2_tmoo5"]
+[ext_resource type="AudioStream" uid="uid://7rxgwcop3d0c" path="res://sounds/snd_card_trash.mp3" id="3_q6pxc"]
+[ext_resource type="Script" path="res://cards/ProgressBar.gd" id="4_fabr2"]
+[ext_resource type="Script" path="res://cards/card_area_position.gd" id="5_4stpx"]
+[ext_resource type="AudioStream" uid="uid://cox1cp20x6iqu" path="res://sounds/snd_card_1.mp3" id="7_ty2f7"]
+[ext_resource type="AudioStream" uid="uid://bj6lf3x8668fh" path="res://sounds/game.mp3" id="8_bhv4q"]
+[ext_resource type="Script" path="res://menus/pauseMenu.gd" id="10_x0b16"]
+[ext_resource type="Script" path="res://menus/round_summary_menu.gd" id="11_gcb22"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ucven"]
+size = Vector2(144, 146)
+
+[sub_resource type="Animation" id="Animation_7v41d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ofkhl"]
+resource_name = "shake"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-2, -3), Vector2(4, 3), Vector2(-3, 5), Vector2(7, -3), Vector2(-5, 5), Vector2(-3, -3), Vector2(4, 3), Vector2(-6, -1), Vector2(5, -5), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f7ptx"]
+_data = {
+"RESET": SubResource("Animation_7v41d"),
+"shake": SubResource("Animation_ofkhl")
+}
+
+[node name="game" type="Node2D"]
+process_mode = 1
+script = ExtResource("1_v1oa5")
+
+[node name="trash_can" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 105.0
+offset_top = 888.0
+offset_right = 105.0
+offset_bottom = 888.0
+script = ExtResource("2_enlsn")
+metadata/_edit_group_ = true
+
+[node name="Area2D" type="Area2D" parent="trash_can"]
+position = Vector2(0, 70)
+collision_layer = 2
+collision_mask = 4
+monitorable = false
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="trash_can/Area2D"]
+shape = SubResource("RectangleShape2D_ucven")
+
+[node name="icon" type="Label" parent="trash_can"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -88.0
+offset_top = -7.5
+offset_right = 88.0
+offset_bottom = 167.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_tmoo5")
+theme_override_font_sizes/font_size = 128
+text = "🧺"
+vertical_alignment = 1
+
+[node name="snd_card_slot" type="AudioStreamPlayer2D" parent="trash_can"]
+position = Vector2(105, 960)
+stream = ExtResource("3_q6pxc")
+
+[node name="request_cards" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="card_holder_anchor" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 995.0
+offset_top = 960.0
+offset_right = 995.0
+offset_bottom = 960.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="deck" type="HBoxContainer" parent="card_holder_anchor"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -631.0
+offset_top = -62.0
+offset_right = 631.0
+offset_bottom = 62.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="number_cards" type="Node2D" parent="."]
+
+[node name="card_area" type="Node2D" parent="."]
+position = Vector2(960, 474)
+
+[node name="0" type="Marker2D" parent="card_area"]
+position = Vector2(-676, -223)
+script = ExtResource("5_4stpx")
+metadata/_edit_group_ = true
+
+[node name="1" type="Marker2D" parent="card_area"]
+position = Vector2(-750, 103)
+script = ExtResource("5_4stpx")
+metadata/_edit_group_ = true
+
+[node name="2" type="Marker2D" parent="card_area"]
+position = Vector2(-4, -35)
+script = ExtResource("5_4stpx")
+metadata/_edit_group_ = true
+
+[node name="3" type="Marker2D" parent="card_area"]
+position = Vector2(-274, -303)
+script = ExtResource("5_4stpx")
+metadata/_edit_group_ = true
+
+[node name="4" type="Marker2D" parent="card_area"]
+position = Vector2(267, -329)
+script = ExtResource("5_4stpx")
+metadata/_edit_group_ = true
+
+[node name="5" type="Marker2D" parent="card_area"]
+position = Vector2(696, -192)
+script = ExtResource("5_4stpx")
+metadata/_edit_group_ = true
+
+[node name="6" type="Marker2D" parent="card_area"]
+position = Vector2(-364, 179)
+script = ExtResource("5_4stpx")
+metadata/_edit_group_ = true
+
+[node name="7" type="Marker2D" parent="card_area"]
+position = Vector2(356, 127)
+script = ExtResource("5_4stpx")
+metadata/_edit_group_ = true
+
+[node name="8" type="Marker2D" parent="card_area"]
+position = Vector2(736, 171)
+script = ExtResource("5_4stpx")
+metadata/_edit_group_ = true
+
+[node name="hud" parent="." instance=ExtResource("2_e86e4")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_f7ptx")
+}
+
+[node name="card_request_spawner" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="card_number_spawner" type="Timer" parent="."]
+wait_time = 8.0
+autostart = true
+
+[node name="round_progress_bar" type="ProgressBar" parent="."]
+offset_left = 10.0
+offset_top = 1047.0
+offset_right = 1910.0
+offset_bottom = 1070.0
+theme = ExtResource("2_tmoo5")
+value = 100.0
+show_percentage = false
+script = ExtResource("4_fabr2")
+
+[node name="Timer" type="Timer" parent="round_progress_bar"]
+wait_time = 120.0
+one_shot = true
+
+[node name="snd_card_1" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_ty2f7")
+
+[node name="game" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_bhv4q")
+volume_db = -5.0
+
+[node name="pause_menu" type="Control" parent="."]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 0
+theme = ExtResource("2_tmoo5")
+script = ExtResource("10_x0b16")
+
+[node name="pause" type="Button" parent="pause_menu"]
+layout_mode = 0
+offset_left = 1802.0
+offset_top = 5.0
+offset_right = 1915.0
+offset_bottom = 118.0
+text = "||"
+
+[node name="paused_stuff" type="Control" parent="pause_menu"]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="pause_menu/paused_stuff"]
+layout_mode = 0
+offset_left = -64.0
+offset_top = -53.0
+offset_right = 2001.0
+offset_bottom = 1134.0
+color = Color(0, 0, 0, 0.392157)
+
+[node name="buttons" type="VBoxContainer" parent="pause_menu/paused_stuff"]
+layout_mode = 0
+offset_left = 723.0
+offset_top = 211.0
+offset_right = 1198.0
+offset_bottom = 849.0
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="pause_menu/paused_stuff/buttons"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 128
+text = "Paused"
+
+[node name="continue" type="Button" parent="pause_menu/paused_stuff/buttons"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Continue"
+
+[node name="exit" type="Button" parent="pause_menu/paused_stuff/buttons"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Exit"
+
+[node name="round_summary_menu" type="Node2D" parent="."]
+process_mode = 3
+visible = false
+script = ExtResource("11_gcb22")
+
+[node name="stuff" type="Control" parent="round_summary_menu"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("2_tmoo5")
+
+[node name="ColorRect" type="ColorRect" parent="round_summary_menu/stuff"]
+layout_mode = 0
+offset_left = -64.0
+offset_top = -53.0
+offset_right = 2001.0
+offset_bottom = 1134.0
+color = Color(0, 0, 0, 0.392157)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="round_summary_menu/stuff"]
+layout_mode = 0
+offset_left = 593.0
+offset_top = 211.0
+offset_right = 1328.0
+offset_bottom = 887.0
+alignment = 1
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="round_summary_menu/stuff/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 128
+text = "Round End"
+horizontal_alignment = 1
+
+[node name="points" type="Label" parent="round_summary_menu/stuff/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Points: "
+horizontal_alignment = 1
+
+[node name="restart" type="Button" parent="round_summary_menu/stuff/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Restart"
+
+[node name="end" type="Button" parent="round_summary_menu/stuff/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "End"
+
+[connection signal="mouse_entered" from="trash_can/Area2D" to="trash_can" method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="trash_can/Area2D" to="trash_can" method="_on_area_2d_mouse_exited"]
+[connection signal="timeout" from="card_request_spawner" to="." method="_on_card_spawner_timeout"]
+[connection signal="timeout" from="card_number_spawner" to="." method="_on_card_number_spawner_timeout"]
+[connection signal="timer_finished" from="round_progress_bar" to="." method="_on_round_progress_bar_timer_finished"]
+[connection signal="timeout" from="round_progress_bar/Timer" to="round_progress_bar" method="_on_timer_timeout"]
+[connection signal="exit" from="pause_menu" to="." method="_on_pause_menu_exit"]
+[connection signal="pressed" from="pause_menu/pause" to="pause_menu" method="_on_pause_pressed"]
+[connection signal="pressed" from="pause_menu/paused_stuff/buttons/continue" to="pause_menu" method="_on_continue_pressed"]
+[connection signal="pressed" from="pause_menu/paused_stuff/buttons/exit" to="pause_menu" method="_on_exit_pressed"]
+[connection signal="exit" from="round_summary_menu" to="." method="_on_pause_menu_exit"]
+[connection signal="restart" from="round_summary_menu" to="." method="_on_round_summary_menu_restart"]
+[connection signal="pressed" from="round_summary_menu/stuff/VBoxContainer/restart" to="round_summary_menu" method="_on_restart_pressed"]
+[connection signal="pressed" from="round_summary_menu/stuff/VBoxContainer/end" to="round_summary_menu" method="_on_end_pressed"]

@@ -1,0 +1,17 @@
+{
+	"messages_correct": [
+		"Good!", "Great!", "Outstanding!", "Amazing!",
+		"Random-tastic!", "Number-tastic!", "Generator-tastic!",
+		"egg", "Congratulations!", "👏👏👏", "(Not) Sponsored by GMTK"
+	],
+	"messages_pass": [
+		"Hmm...", "eh", "Alright", "I guess that works",
+		"Lukewarm", "😐", "😑", "🗿"
+	],
+	"messages_strike": [
+		"🗿🗿🗿🗿🗿🗿🗿🗿", "Bruh", "Nuh Uh", "Not a valid value", "Too Random"
+	],
+	"messages_fail": [
+		"K.O", "❌❌❌❌❌", "I am kill", "Mortis", "Failure", "👎"
+	]
+}

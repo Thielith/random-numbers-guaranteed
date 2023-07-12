@@ -1,0 +1,14 @@
+changes:
+- Request Cards go to random pre-determined positions now so they don't overlap with eachother
+- made requests on Request Cards clearer
+- the return text that appears before a Request Card disappears is now the color of the popup label
+- increased separation between number cards so you can see them more easily at a glance
+- disabled screen shake because i dislike it now
+- number cards put into Request Card slots now move with the slot
+- Request Cards on timeout now run the same checks as if the player clicked the submit button (i.e if you fill a Request Card and let it timeout, it will still award points if the number is correct)
+- made Request Card description text a bit bigger
+
+bug fixes:
+- (maybe) fixed a rare bug where game would crash after deleting a Request Card with a glitched number card state
+- (maybe) fixed a rare bug where a Request Card slot would have a card without showing it
+- fixed a bug where putting a number card into a slot and moving the mouse away quickly would result in a glitched number card

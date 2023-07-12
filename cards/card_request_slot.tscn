@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://bss28d7xwbxna"]
+
+[ext_resource type="Theme" uid="uid://o5p7cglq6qn" path="res://cards/theme_card.tres" id="1_3jfdw"]
+[ext_resource type="Script" path="res://cards/card_request_slot.gd" id="1_6vmjw"]
+[ext_resource type="AudioStream" uid="uid://dmui6oom7dln4" path="res://sounds/snd_card_slot.mp3" id="3_8t3hn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bnotn"]
+size = Vector2(79, 121)
+
+[node name="slot" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 6
+size_flags_vertical = 2
+script = ExtResource("1_6vmjw")
+metadata/_edit_group_ = true
+
+[node name="border" type="Panel" parent="."]
+layout_mode = 0
+offset_left = -39.0
+offset_right = 40.0
+offset_bottom = 121.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_3jfdw")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-39, 0)
+collision_layer = 2
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+position = Vector2(39.5, 60.5)
+shape = SubResource("RectangleShape2D_bnotn")
+
+[node name="snd_card_slot" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_8t3hn")
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
