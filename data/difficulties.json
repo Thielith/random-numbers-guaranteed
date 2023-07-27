@@ -1,0 +1,54 @@
+[
+	{
+		"name": "Classic",
+		"description": "The original settings that were used for the game jam version.",
+		"data": "1+24 requests max, max 3 out, 10+75 numbers max, 0.2 req / sec, 0.625 num / sec",
+		"roundTime": 120,
+		"requestSpawnStart": 1,
+		"requestSpawnAmount": 1,
+		"requestSpawnFrequency": 5,
+		"requestLifetime": 15,
+		"numberSpawnStart": 10,
+		"numberSpawnAmount": 5,
+		"numberSpawnFrequency": 8
+	},
+	{
+		"name": "Easy",
+		"description": "Longer round, slower requests, more number cards.",
+		"data": "1+22 requests max, max 2 out, 20+60 numbers max, 0.125 req / sec, 0.333 num / sec",
+		"roundTime": 180,
+		"requestSpawnStart": 1,
+		"requestSpawnAmount": 1,
+		"requestSpawnFrequency": 9,
+		"requestLifetime": 20,
+		"numberSpawnStart": 20,
+		"numberSpawnAmount": 1,
+		"numberSpawnFrequency": 3
+	},
+	{
+		"name": "Normal",
+		"description": "Pretty standard difficulty, hopefully.",
+		"data": "1+20 requests max, max 3 out, 6+45 numbers max, 0.1667 req / sec, 0.375 num / sec",
+		"roundTime": 120,
+		"requestSpawnStart": 1,
+		"requestSpawnAmount": 1,
+		"requestSpawnFrequency": 6,
+		"requestLifetime": 18,
+		"numberSpawnStart": 6,
+		"numberSpawnAmount": 3,
+		"numberSpawnFrequency": 8
+	},
+	{
+		"name": "Hard",
+		"description": "Frantic hurry up type beat.",
+		"data": "1+15 requests max, max 4 out, 6+30 numbers max, 0.25 req / sec, 0.5 num / sec",
+		"roundTime": 60,
+		"requestSpawnStart": 1,
+		"requestSpawnAmount": 2,
+		"requestSpawnFrequency": 6,
+		"requestLifetime": 8,
+		"numberSpawnStart": 6,
+		"numberSpawnAmount": 4,
+		"numberSpawnFrequency": 4
+	},
+]

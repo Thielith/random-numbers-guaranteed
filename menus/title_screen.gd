@@ -2,21 +2,13 @@ extends Node2D
 
 signal play
 signal instructions
-@export var playingIntro := true
 
-func _input(event):
-	if Input.is_action_just_pressed("select_card") and playingIntro:
-		playingIntro = false
-		$buttons/AnimationPlayer.play("RESET")
-		$title_label/AnimationPlayer.play("RESET")
-		await $title_label/AnimationPlayer.animation_finished
-		$title_label/AnimationPlayer.play("idle")
+func fadeInButtons():
+	$buttons/AnimationPlayer.play("show")
 
-func playIntro():
-	$title_label/AnimationPlayer.play("start")
-
-func _on_play_pressed():
+func _on_play_button_pressed():
 	emit_signal("play")
-
-func _on_instructions_pressed():
+func _on_instructions_button_pressed():
 	emit_signal("instructions")
+func _on_quit_button_pressed():
+	get_tree().quit()

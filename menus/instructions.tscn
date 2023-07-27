@@ -1,216 +1,3347 @@
-[gd_scene load_steps=3 format=3 uid="uid://bd2scmccookn1"]
+[gd_scene load_steps=24 format=3 uid="uid://bd2scmccookn1"]
 
 [ext_resource type="Script" path="res://menus/instructions.gd" id="1_qfwdo"]
-[ext_resource type="Theme" uid="uid://o5p7cglq6qn" path="res://cards/theme_card.tres" id="2_ma2ud"]
+[ext_resource type="Theme" uid="uid://o5p7cglq6qn" path="res://cards/theme_master.tres" id="2_yviea"]
+[ext_resource type="Texture2D" uid="uid://05hped8ilb7w" path="res://menus/instruction_graphics/arrows2.png" id="3_8biio"]
+[ext_resource type="AudioStream" uid="uid://cox1cp20x6iqu" path="res://sounds/snd_card_num_spawn.mp3" id="3_608w3"]
+[ext_resource type="AudioStream" uid="uid://dmui6oom7dln4" path="res://sounds/snd_card_num_place_slot.mp3" id="4_t1md5"]
+[ext_resource type="Texture2D" uid="uid://cowt1ia4sb1f5" path="res://menus/instruction_graphics/arrows4.png" id="4_w14yl"]
+[ext_resource type="Texture2D" uid="uid://dxg81to4veb58" path="res://menus/instruction_graphics/arrows3.png" id="5_76uye"]
+[ext_resource type="AudioStream" uid="uid://dalfryh2ppojr" path="res://sounds/snd_card_req_spawn.mp3" id="5_u21kd"]
+[ext_resource type="Texture2D" uid="uid://bfuifg5yw6t0v" path="res://menus/instruction_graphics/arrows0.png" id="6_te810"]
+[ext_resource type="StyleBox" uid="uid://r5wbhorhfq24" path="res://cards/theme_background_green.tres" id="8_r636m"]
+[ext_resource type="StyleBox" uid="uid://br701bdfb6aln" path="res://cards/theme_background_yellow.tres" id="9_m1opf"]
+[ext_resource type="StyleBox" uid="uid://donggvp4d7ogv" path="res://cards/theme_background_red.tres" id="10_iretj"]
+[ext_resource type="Texture2D" uid="uid://dr37t8n7clrjx" path="res://menus/instruction_graphics/arrows1.png" id="11_bw2ug"]
+[ext_resource type="Script" path="res://menus/button.gd" id="15_t7itw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lghri"]
+bg_color = Color(0.294118, 0.396078, 0.411765, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.745098, 0.803922, 0.819608, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+anti_aliasing_size = 0.25
+
+[sub_resource type="Animation" id="Animation_yqvr0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("card_fake:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("card_fake:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_gbhad"]
+resource_name = "move_to_slot"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("card_fake:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.203063, 1),
+"update": 0,
+"values": [Vector2(0, 500), Vector2(0, -10)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("card_fake/AudioStreamPlayer:stream")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_608w3")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("card_fake/AudioStreamPlayer:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("card_fake:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_7d8b2"]
+resource_name = "place"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("card_fake:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.2, 1),
+"update": 0,
+"values": [Vector2(0, -10), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("card_fake/AudioStreamPlayer:stream")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_t1md5")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("card_fake/AudioStreamPlayer:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cpor7"]
+_data = {
+"RESET": SubResource("Animation_yqvr0"),
+"move_to_slot": SubResource("Animation_gbhad"),
+"place": SubResource("Animation_7d8b2")
+}
+
+[sub_resource type="Animation" id="Animation_smnw6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../card_fake/card/Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(99, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../card_fake/card/Label:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../card_fake:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_bhdu8"]
+resource_name = "return"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../card_fake/card/Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.5),
+"transitions": PackedFloat32Array(0.2, 5, 1, 1),
+"update": 0,
+"values": [Vector2(99, -69), Vector2(99, -85), Vector2(99, -61), Vector2(99, -69)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../card_fake/card/Label:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 1, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../card_fake:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../card_fake/card:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.35, 0.4, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 16), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_47l5m"]
+resource_name = "spawn"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../card_fake/card/Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.2, 1),
+"update": 0,
+"values": [Vector2(99, 0), Vector2(99, -69)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../card_fake/card/Label:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.2, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ejcmp"]
+_data = {
+"RESET": SubResource("Animation_smnw6"),
+"return": SubResource("Animation_bhdu8"),
+"spawn": SubResource("Animation_47l5m")
+}
 
 [node name="instructions" type="Node2D"]
 script = ExtResource("1_qfwdo")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 1920.0
-offset_bottom = 1080.0
-color = Color(0, 0, 0, 0.588235)
-metadata/_edit_lock_ = true
-
 [node name="pages" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-theme = ExtResource("2_ma2ud")
+theme = ExtResource("2_yviea")
 
-[node name="page1" type="Node2D" parent="pages"]
+[node name="request_card" type="Node2D" parent="pages"]
 visible = false
 
-[node name="Label" type="Label" parent="pages/page1"]
-offset_left = 60.0
-offset_top = 215.0
-offset_right = 1860.0
-offset_bottom = 427.0
-theme_override_font_sizes/font_size = 75
-text = "From the top of your screen you will see Number Requests slide onto the play area."
+[node name="ProgressBar" type="ProgressBar" parent="pages/request_card"]
+offset_left = 769.0
+offset_top = 624.0
+offset_right = 1152.0
+offset_bottom = 651.0
+theme = ExtResource("2_yviea")
+value = 100.0
+show_percentage = false
+
+[node name="card_fake" type="Control" parent="pages/request_card"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 769.0
+offset_top = 324.0
+offset_right = 1152.0
+offset_bottom = 629.0
+pivot_offset = Vector2(191, 152)
+size_flags_horizontal = 4
+
+[node name="Button" type="Button" parent="pages/request_card/card_fake"]
+layout_mode = 0
+offset_left = 374.0
+offset_right = 436.0
+offset_bottom = 57.0
+theme = ExtResource("2_yviea")
+theme_type_variation = &"ButtonCardRequest"
+theme_override_styles/hover = SubResource("StyleBoxFlat_lghri")
+button_mask = 0
+text = "✔"
+alignment = 2
+
+[node name="card" type="Panel" parent="pages/request_card/card_fake"]
+layout_mode = 0
+offset_right = 383.0
+offset_bottom = 305.0
+size_flags_horizontal = 4
+theme = ExtResource("2_yviea")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="pages/request_card/card_fake/card"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 9.0
+offset_right = 374.0
+offset_bottom = 296.0
+
+[node name="header" type="Label" parent="pages/request_card/card_fake/card/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "Number that's wanted"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="pages/request_card/card_fake/card/VBoxContainer"]
+custom_minimum_size = Vector2(0, 121)
+layout_mode = 2
+alignment = 1
+
+[node name="slot_fake_0" type="Panel" parent="pages/request_card/card_fake/card/VBoxContainer/HBoxContainer"]
+z_index = 1
+custom_minimum_size = Vector2(119, 182)
+layout_mode = 2
+
+[node name="slot_fake_1" type="Panel" parent="pages/request_card/card_fake/card/VBoxContainer/HBoxContainer"]
+z_index = 1
+custom_minimum_size = Vector2(119, 182)
+layout_mode = 2
+
+[node name="slot_fake_2" type="Panel" parent="pages/request_card/card_fake/card/VBoxContainer/HBoxContainer"]
+z_index = 1
+custom_minimum_size = Vector2(119, 182)
+layout_mode = 2
+
+[node name="footer" type="Label" parent="pages/request_card/card_fake/card/VBoxContainer"]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+theme_type_variation = &"HeaderSmall"
+theme_override_font_sizes/font_size = 18
+text = "Description that describes
+a range of numbers"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="pages/request_card"]
+position = Vector2(694, 477)
+texture = ExtResource("3_8biio")
+
+[node name="Label" type="Label" parent="pages/request_card/Sprite2D"]
+offset_left = -208.0
+offset_top = -26.0
+offset_right = -83.0
+offset_bottom = 41.0
+theme = ExtResource("2_yviea")
+theme_override_font_sizes/font_size = 48
+text = "Slots"
+
+[node name="Sprite2D3" type="Sprite2D" parent="pages/request_card"]
+position = Vector2(1316, 376)
+texture = ExtResource("4_w14yl")
+
+[node name="Label2" type="Label" parent="pages/request_card/Sprite2D3"]
+offset_left = -75.0
+offset_top = 49.0
+offset_right = 276.0
+offset_bottom = 119.0
+theme = ExtResource("2_yviea")
+theme_override_font_sizes/font_size = 48
+text = "Confirm button"
+
+[node name="Sprite2D4" type="Sprite2D" parent="pages/request_card"]
+position = Vector2(718, 692)
+rotation = 4.11451
+texture = ExtResource("5_76uye")
+
+[node name="Label3" type="Label" parent="pages/request_card"]
+offset_left = 620.0
+offset_top = 756.0
+offset_right = 1227.0
+offset_bottom = 826.0
+theme = ExtResource("2_yviea")
+theme_override_font_sizes/font_size = 48
+text = "Time until request expires"
+
+[node name="Label" type="Label" parent="pages/request_card"]
+offset_left = 267.0
+offset_top = 145.0
+offset_right = 1653.0
+offset_bottom = 238.0
+theme_override_font_sizes/font_size = 65
+text = "This is a request card."
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Label2" type="Label" parent="pages/page1"]
-offset_left = 60.0
-offset_top = 495.0
-offset_right = 1860.0
-offset_bottom = 707.0
-theme_override_font_sizes/font_size = 75
-text = "Each request will require 1-3 numbers.  Completing requests will give you points."
+[node name="request_card_spawning" type="Node2D" parent="pages"]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="pages/request_card_spawning"]
+position = Vector2(1011, 107)
+texture = ExtResource("6_te810")
+
+[node name="card_fake" type="Control" parent="pages/request_card_spawning"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 193.0
+offset_top = 256.0
+offset_right = 576.0
+offset_bottom = 561.0
+rotation = 0.104702
+pivot_offset = Vector2(191, 152)
+size_flags_horizontal = 4
+metadata/_edit_group_ = true
+
+[node name="Button" type="Button" parent="pages/request_card_spawning/card_fake"]
+layout_mode = 0
+offset_left = 374.0
+offset_top = 1.52588e-05
+offset_right = 436.0
+offset_bottom = 57.0
+theme = ExtResource("2_yviea")
+theme_type_variation = &"ButtonCardRequest"
+theme_override_styles/hover = SubResource("StyleBoxFlat_lghri")
+button_mask = 0
+text = "✔"
+alignment = 2
+
+[node name="card" type="Panel" parent="pages/request_card_spawning/card_fake"]
+layout_mode = 0
+offset_right = 383.0
+offset_bottom = 305.0
+size_flags_horizontal = 4
+theme = ExtResource("2_yviea")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="pages/request_card_spawning/card_fake/card"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 9.0
+offset_right = 374.0
+offset_bottom = 296.0
+
+[node name="header" type="Label" parent="pages/request_card_spawning/card_fake/card/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="pages/request_card_spawning/card_fake/card/VBoxContainer"]
+custom_minimum_size = Vector2(0, 121)
+layout_mode = 2
+alignment = 1
+
+[node name="slot_fake_0" type="Panel" parent="pages/request_card_spawning/card_fake/card/VBoxContainer/HBoxContainer"]
+z_index = 1
+custom_minimum_size = Vector2(119, 182)
+layout_mode = 2
+
+[node name="card_fake" type="Panel" parent="pages/request_card_spawning/card_fake/card/VBoxContainer/HBoxContainer/slot_fake_0"]
+visible = false
+layout_mode = 0
+offset_right = 119.0
+offset_bottom = 181.999
+pivot_offset = Vector2(39, 60)
+
+[node name="Label" type="Label" parent="pages/request_card_spawning/card_fake/card/VBoxContainer/HBoxContainer/slot_fake_0/card_fake"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 21.0
+offset_right = 108.0
+offset_bottom = 196.0
+theme_override_font_sizes/font_size = 128
+text = "R"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="pages/request_card_spawning/card_fake/card/VBoxContainer/HBoxContainer/slot_fake_0/card_fake"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_cpor7")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="pages/request_card_spawning/card_fake/card/VBoxContainer/HBoxContainer/slot_fake_0/card_fake"]
+stream = ExtResource("4_t1md5")
+
+[node name="footer" type="Label" parent="pages/request_card_spawning/card_fake/card/VBoxContainer"]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+theme_type_variation = &"HeaderSmall"
+theme_override_font_sizes/font_size = 18
+text = "A single digit number"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Label" type="Label" parent="pages/request_card_spawning/card_fake/card"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 99.0
+offset_right = 298.0
+offset_bottom = 88.0
+theme_override_font_sizes/font_size = 64
+text = "return"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="pages/request_card_spawning/card_fake/card/Label"]
+root_node = NodePath("../../../../title")
+libraries = {
+"": SubResource("AnimationLibrary_ejcmp")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="pages/request_card_spawning/card_fake/card"]
+stream = ExtResource("5_u21kd")
+
+[node name="card_fake2" type="Control" parent="pages/request_card_spawning"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 769.0
+offset_top = 256.0
+offset_right = 1152.0
+offset_bottom = 561.0
+rotation = 0.0428082
+pivot_offset = Vector2(191, 152)
+size_flags_horizontal = 4
+metadata/_edit_group_ = true
+
+[node name="Button" type="Button" parent="pages/request_card_spawning/card_fake2"]
+layout_mode = 0
+offset_left = 374.0
+offset_top = 1.52588e-05
+offset_right = 436.0
+offset_bottom = 57.0
+theme = ExtResource("2_yviea")
+theme_type_variation = &"ButtonCardRequest"
+theme_override_styles/hover = SubResource("StyleBoxFlat_lghri")
+button_mask = 0
+text = "✔"
+alignment = 2
+
+[node name="card" type="Panel" parent="pages/request_card_spawning/card_fake2"]
+layout_mode = 0
+offset_right = 383.0
+offset_bottom = 305.0
+size_flags_horizontal = 4
+theme = ExtResource("2_yviea")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="pages/request_card_spawning/card_fake2/card"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 9.0
+offset_right = 374.0
+offset_bottom = 296.0
+
+[node name="header" type="Label" parent="pages/request_card_spawning/card_fake2/card/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="pages/request_card_spawning/card_fake2/card/VBoxContainer"]
+custom_minimum_size = Vector2(0, 121)
+layout_mode = 2
+alignment = 1
+
+[node name="slot_fake_0" type="Panel" parent="pages/request_card_spawning/card_fake2/card/VBoxContainer/HBoxContainer"]
+z_index = 1
+custom_minimum_size = Vector2(119, 182)
+layout_mode = 2
+
+[node name="slot_fake_1" type="Panel" parent="pages/request_card_spawning/card_fake2/card/VBoxContainer/HBoxContainer"]
+z_index = 1
+custom_minimum_size = Vector2(119, 182)
+layout_mode = 2
+
+[node name="footer" type="Label" parent="pages/request_card_spawning/card_fake2/card/VBoxContainer"]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+theme_type_variation = &"HeaderSmall"
+theme_override_font_sizes/font_size = 18
+text = "A double digit number"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="card_fake3" type="Control" parent="pages/request_card_spawning"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1345.0
+offset_top = 261.0
+offset_right = 1728.0
+offset_bottom = 566.0
+rotation = -0.0709541
+pivot_offset = Vector2(191, 152)
+size_flags_horizontal = 4
+metadata/_edit_group_ = true
+
+[node name="Button" type="Button" parent="pages/request_card_spawning/card_fake3"]
+layout_mode = 0
+offset_left = 374.0
+offset_top = 3.05176e-05
+offset_right = 436.0
+offset_bottom = 57.0
+theme = ExtResource("2_yviea")
+theme_type_variation = &"ButtonCardRequest"
+theme_override_styles/hover = SubResource("StyleBoxFlat_lghri")
+button_mask = 0
+text = "✔"
+alignment = 2
+
+[node name="card" type="Panel" parent="pages/request_card_spawning/card_fake3"]
+layout_mode = 0
+offset_right = 383.0
+offset_bottom = 305.0
+size_flags_horizontal = 4
+theme = ExtResource("2_yviea")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="pages/request_card_spawning/card_fake3/card"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 9.0
+offset_right = 374.0
+offset_bottom = 296.0
+
+[node name="header" type="Label" parent="pages/request_card_spawning/card_fake3/card/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="pages/request_card_spawning/card_fake3/card/VBoxContainer"]
+custom_minimum_size = Vector2(0, 121)
+layout_mode = 2
+alignment = 1
+
+[node name="slot_fake_0" type="Panel" parent="pages/request_card_spawning/card_fake3/card/VBoxContainer/HBoxContainer"]
+z_index = 1
+custom_minimum_size = Vector2(119, 182)
+layout_mode = 2
+
+[node name="slot_fake_1" type="Panel" parent="pages/request_card_spawning/card_fake3/card/VBoxContainer/HBoxContainer"]
+z_index = 1
+custom_minimum_size = Vector2(119, 182)
+layout_mode = 2
+
+[node name="slot_fake_2" type="Panel" parent="pages/request_card_spawning/card_fake3/card/VBoxContainer/HBoxContainer"]
+z_index = 1
+custom_minimum_size = Vector2(119, 182)
+layout_mode = 2
+
+[node name="footer" type="Label" parent="pages/request_card_spawning/card_fake3/card/VBoxContainer"]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+theme_type_variation = &"HeaderSmall"
+theme_override_font_sizes/font_size = 18
+text = "A triple digit number"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Label" type="Label" parent="pages/request_card_spawning"]
+offset_left = 267.0
+offset_top = 657.0
+offset_right = 1653.0
+offset_bottom = 936.0
+theme_override_font_sizes/font_size = 65
+text = "From the top of your screen you will see Number Requests slide onto the play area.  Each request will require 1-3 number cards."
+horizontal_alignment = 1
+vertical_alignment = 2
+autowrap_mode = 2
+
+[node name="request_card_points-0" type="Node2D" parent="pages"]
+visible = false
+
+[node name="point_label" type="Label" parent="pages/request_card_points-0"]
+custom_minimum_size = Vector2(0, 79)
+offset_left = 729.0
+offset_top = 287.0
+offset_right = 1191.0
+offset_bottom = 443.0
+theme_override_font_sizes/font_size = 80
+text = "Points: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="card_fake" type="Control" parent="pages/request_card_points-0"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 769.0
+offset_top = 444.0
+offset_right = 1152.0
+offset_bottom = 749.0
+pivot_offset = Vector2(191, 152)
+size_flags_horizontal = 4
+metadata/_edit_group_ = true
+
+[node name="Button" type="Button" parent="pages/request_card_points-0/card_fake"]
+layout_mode = 0
+offset_left = 374.0
+offset_right = 436.0
+offset_bottom = 57.0
+theme = ExtResource("2_yviea")
+theme_type_variation = &"ButtonCardRequest"
+theme_override_styles/hover = SubResource("StyleBoxFlat_lghri")
+button_mask = 0
+text = "✔"
+alignment = 2
+
+[node name="card" type="Panel" parent="pages/request_card_points-0/card_fake"]
+layout_mode = 0
+offset_right = 383.0
+offset_bottom = 305.0
+size_flags_horizontal = 4
+theme = ExtResource("2_yviea")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="pages/request_card_points-0/card_fake/card"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 9.0
+offset_right = 374.0
+offset_bottom = 296.0
+
+[node name="header" type="Label" parent="pages/request_card_points-0/card_fake/card/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="pages/request_card_points-0/card_fake/card/VBoxContainer"]
+custom_minimum_size = Vector2(0, 121)
+layout_mode = 2
+alignment = 1
+
+[node name="slot_fake_0" type="Panel" parent="pages/request_card_points-0/card_fake/card/VBoxContainer/HBoxContainer"]
+z_index = 1
+custom_minimum_size = Vector2(119, 182)
+layout_mode = 2
+
+[node name="card_fake" type="Panel" parent="pages/request_card_points-0/card_fake/card/VBoxContainer/HBoxContainer/slot_fake_0"]
+layout_mode = 0
+offset_right = 119.0
+offset_bottom = 181.999
+pivot_offset = Vector2(39, 60)
+
+[node name="Label" type="Label" parent="pages/request_card_points-0/card_fake/card/VBoxContainer/HBoxContainer/slot_fake_0/card_fake"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 21.0
+offset_right = 108.0
+offset_bottom = 196.0
+theme_override_font_sizes/font_size = 128
+text = "1"
+
+[node name="footer" type="Label" parent="pages/request_card_points-0/card_fake/card/VBoxContainer"]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+theme_type_variation = &"HeaderSmall"
+theme_override_font_sizes/font_size = 18
+text = "A single digit number"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="hand_point" type="Label" parent="pages/request_card_points-0/card_fake"]
+custom_minimum_size = Vector2(0, 79)
+layout_mode = 0
+offset_left = 354.0
+offset_top = 81.0
+offset_right = 457.0
+offset_bottom = 237.0
+rotation = -0.867888
+theme_override_font_sizes/font_size = 112
+text = "☝"
+vertical_alignment = 1
+
+[node name="point_label2" type="Label" parent="pages/request_card_points-0"]
+custom_minimum_size = Vector2(0, 79)
+offset_left = 729.0
+offset_top = 751.0
+offset_right = 1236.0
+offset_bottom = 907.0
+theme_override_font_sizes/font_size = 80
+text = "Points:👍"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="pages/request_card_points-0"]
+position = Vector2(671, 498)
+texture = ExtResource("11_bw2ug")
+
+[node name="Sprite2D2" type="Sprite2D" parent="pages/request_card_points-0"]
+position = Vector2(1265, 742)
+scale = Vector2(-1, 1)
+texture = ExtResource("11_bw2ug")
+
+[node name="Label" type="Label" parent="pages/request_card_points-0"]
+offset_left = 267.0
+offset_top = 145.0
+offset_right = 1653.0
+offset_bottom = 238.0
+theme_override_font_sizes/font_size = 65
+text = "Completing requests will give you points."
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="page2" type="Node2D" parent="pages"]
+[node name="request_card_points-1" type="Node2D" parent="pages"]
 visible = false
 
-[node name="Label" type="Label" parent="pages/page2"]
-offset_left = 60.0
-offset_top = 215.0
-offset_right = 1860.0
-offset_bottom = 533.0
-theme_override_font_sizes/font_size = 75
+[node name="points_label" type="VBoxContainer" parent="pages/request_card_points-1"]
+offset_left = 73.0
+offset_top = 366.0
+offset_right = 959.0
+offset_bottom = 787.0
+metadata/_edit_group_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="pages/request_card_points-1/points_label"]
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("2_yviea")
+
+[node name="popup_panel" type="Panel" parent="pages/request_card_points-1/points_label/HBoxContainer"]
+custom_minimum_size = Vector2(562, 84)
+layout_mode = 2
+size_flags_horizontal = 10
+theme = ExtResource("2_yviea")
+theme_override_styles/panel = ExtResource("8_r636m")
+
+[node name="Label2" type="Label" parent="pages/request_card_points-1/points_label/HBoxContainer/popup_panel"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = -43.0
+offset_right = 561.0
+offset_bottom = 5.0
+theme_override_font_sizes/font_size = 32
+text = "(Slotted cards = request)"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="pages/request_card_points-1/points_label/HBoxContainer/popup_panel"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 6.0
+offset_right = 557.0
+offset_bottom = 79.0
+theme = ExtResource("2_yviea")
+theme_override_font_sizes/font_size = 48
+text = "Correct!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="pages/request_card_points-1/points_label/HBoxContainer"]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 65
+text = "15 points"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="pages/request_card_points-1/points_label"]
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("2_yviea")
+
+[node name="popup_panel" type="Panel" parent="pages/request_card_points-1/points_label/HBoxContainer2"]
+custom_minimum_size = Vector2(562, 84)
+layout_mode = 2
+size_flags_horizontal = 10
+theme = ExtResource("2_yviea")
+theme_override_styles/panel = ExtResource("9_m1opf")
+
+[node name="Label" type="Label" parent="pages/request_card_points-1/points_label/HBoxContainer2/popup_panel"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 6.0
+offset_right = 557.0
+offset_bottom = 79.0
+theme = ExtResource("2_yviea")
+theme_override_font_sizes/font_size = 48
+text = "Pass"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="pages/request_card_points-1/points_label/HBoxContainer2/popup_panel"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = -43.0
+offset_right = 561.0
+offset_bottom = 5.0
+theme_override_font_sizes/font_size = 32
+text = "(Slotted cards within range)"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="pages/request_card_points-1/points_label/HBoxContainer2"]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 65
+text = "5 points"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="pages/request_card_points-1/points_label"]
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("2_yviea")
+
+[node name="popup_panel" type="Panel" parent="pages/request_card_points-1/points_label/HBoxContainer3"]
+custom_minimum_size = Vector2(562, 84)
+layout_mode = 2
+size_flags_horizontal = 10
+theme = ExtResource("2_yviea")
+theme_override_styles/panel = ExtResource("10_iretj")
+
+[node name="Label2" type="Label" parent="pages/request_card_points-1/points_label/HBoxContainer3/popup_panel"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = -42.0
+offset_right = 561.0
+offset_bottom = 6.0
+theme_override_font_sizes/font_size = 32
+text = "(Timeout)"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="pages/request_card_points-1/points_label/HBoxContainer3/popup_panel"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 6.0
+offset_right = 557.0
+offset_bottom = 79.0
+theme = ExtResource("2_yviea")
+theme_override_font_sizes/font_size = 48
+text = "Incorrect"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="pages/request_card_points-1/points_label/HBoxContainer3"]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 65
+text = "-5 points"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="points_slots" type="HBoxContainer" parent="pages/request_card_points-1"]
+offset_left = 1011.0
+offset_top = 544.0
+offset_right = 2010.0
+offset_bottom = 823.0
+theme = ExtResource("2_yviea")
+alignment = 1
+metadata/_edit_group_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="pages/request_card_points-1/points_slots"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="pages/request_card_points-1/points_slots/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="slot_fake_0" type="Panel" parent="pages/request_card_points-1/points_slots/VBoxContainer/HBoxContainer"]
+z_index = 1
+custom_minimum_size = Vector2(119, 182)
+layout_mode = 2
+
+[node name="slot_fake_1" type="Panel" parent="pages/request_card_points-1/points_slots/VBoxContainer/HBoxContainer"]
+z_index = 1
+custom_minimum_size = Vector2(119, 182)
+layout_mode = 2
+
+[node name="slot_fake_2" type="Panel" parent="pages/request_card_points-1/points_slots/VBoxContainer/HBoxContainer"]
+z_index = 1
+custom_minimum_size = Vector2(119, 182)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="pages/request_card_points-1/points_slots/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 65
+text = "x 1.5"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="pages/request_card_points-1/points_slots"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="pages/request_card_points-1/points_slots/VBoxContainer2"]
+layout_mode = 2
+alignment = 1
+
+[node name="slot_fake_0" type="Panel" parent="pages/request_card_points-1/points_slots/VBoxContainer2/HBoxContainer"]
+z_index = 1
+custom_minimum_size = Vector2(119, 182)
+layout_mode = 2
+
+[node name="slot_fake_1" type="Panel" parent="pages/request_card_points-1/points_slots/VBoxContainer2/HBoxContainer"]
+z_index = 1
+custom_minimum_size = Vector2(119, 182)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="pages/request_card_points-1/points_slots/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 65
+text = "x 1.25"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="pages/request_card_points-1/points_slots"]
+layout_mode = 2
+size_flags_horizontal = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="pages/request_card_points-1/points_slots/VBoxContainer3"]
+layout_mode = 2
+alignment = 1
+
+[node name="slot_fake_0" type="Panel" parent="pages/request_card_points-1/points_slots/VBoxContainer3/HBoxContainer"]
+z_index = 1
+custom_minimum_size = Vector2(119, 182)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="pages/request_card_points-1/points_slots/VBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 65
+text = "x 1.0"
+
+[node name="ProgressBar" type="ProgressBar" parent="pages/request_card_points-1"]
+offset_left = 1011.0
+offset_top = 400.0
+offset_right = 1876.0
+offset_bottom = 461.0
+theme = ExtResource("2_yviea")
+value = 100.0
+show_percentage = false
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="pages/request_card_points-1/ProgressBar"]
+layout_mode = 0
+offset_top = 60.0
+offset_right = 865.0
+offset_bottom = 130.0
+theme_override_font_sizes/font_size = 48
+text = "Full = x1.0    Empty = x0.0"
+horizontal_alignment = 1
+
+[node name="disclaimer" type="Label" parent="pages/request_card_points-1"]
+offset_top = 842.0
+offset_right = 1920.0
+offset_bottom = 912.0
+theme_override_font_sizes/font_size = 48
+text = "(multipliers add together first)"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="pages/request_card_points-1"]
+offset_left = 267.0
+offset_top = 145.0
+offset_right = 1653.0
+offset_bottom = 331.0
+theme_override_font_sizes/font_size = 65
+text = "Points obtained from requests will vary depending on a variety of factors.
+"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="correct_request" type="Node2D" parent="pages"]
+visible = false
+
+[node name="card_fake" type="Control" parent="pages/correct_request"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 193.0
+offset_top = 496.0
+offset_right = 576.0
+offset_bottom = 801.0
+pivot_offset = Vector2(191, 152)
+size_flags_horizontal = 4
+
+[node name="Button" type="Button" parent="pages/correct_request/card_fake"]
+layout_mode = 0
+offset_left = 374.0
+offset_right = 436.0
+offset_bottom = 57.0
+theme = ExtResource("2_yviea")
+theme_type_variation = &"ButtonCardRequest"
+theme_override_styles/hover = SubResource("StyleBoxFlat_lghri")
+button_mask = 0
+text = "✔"
+alignment = 2
+
+[node name="card" type="Panel" parent="pages/correct_request/card_fake"]
+layout_mode = 0
+offset_right = 383.0
+offset_bottom = 305.0
+size_flags_horizontal = 4
+theme = ExtResource("2_yviea")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="pages/correct_request/card_fake/card"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 9.0
+offset_right = 374.0
+offset_bottom = 296.0
+
+[node name="header" type="Label" parent="pages/correct_request/card_fake/card/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="pages/correct_request/card_fake/card/VBoxContainer"]
+custom_minimum_size = Vector2(0, 121)
+layout_mode = 2
+alignment = 1
+
+[node name="slot_fake_0" type="Panel" parent="pages/correct_request/card_fake/card/VBoxContainer/HBoxContainer"]
+z_index = 1
+custom_minimum_size = Vector2(119, 182)
+layout_mode = 2
+
+[node name="card_fake" type="Panel" parent="pages/correct_request/card_fake/card/VBoxContainer/HBoxContainer/slot_fake_0"]
+layout_mode = 0
+offset_right = 119.0
+offset_bottom = 181.999
+pivot_offset = Vector2(39, 60)
+
+[node name="Label" type="Label" parent="pages/correct_request/card_fake/card/VBoxContainer/HBoxContainer/slot_fake_0/card_fake"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 21.0
+offset_right = 108.0
+offset_bottom = 196.0
+theme_override_font_sizes/font_size = 128
+text = "1"
+
+[node name="slot_fake_1" type="Panel" parent="pages/correct_request/card_fake/card/VBoxContainer/HBoxContainer"]
+z_index = 1
+custom_minimum_size = Vector2(119, 182)
+layout_mode = 2
+
+[node name="card_fake" type="Panel" parent="pages/correct_request/card_fake/card/VBoxContainer/HBoxContainer/slot_fake_1"]
+layout_mode = 0
+offset_right = 119.0
+offset_bottom = 181.999
+pivot_offset = Vector2(39, 60)
+
+[node name="Label" type="Label" parent="pages/correct_request/card_fake/card/VBoxContainer/HBoxContainer/slot_fake_1/card_fake"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 21.0
+offset_right = 108.0
+offset_bottom = 196.0
+theme_override_font_sizes/font_size = 128
+text = "0"
+
+[node name="footer" type="Label" parent="pages/correct_request/card_fake/card/VBoxContainer"]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+theme_type_variation = &"HeaderSmall"
+theme_override_font_sizes/font_size = 18
+text = "A double digit number"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Label" type="Label" parent="pages/correct_request/card_fake"]
+layout_mode = 0
+offset_top = 340.0
+offset_right = 383.0
+offset_bottom = 515.0
+theme_override_font_sizes/font_size = 128
+text = "✔"
+horizontal_alignment = 1
+
+[node name="card_fake2" type="Control" parent="pages/correct_request"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 769.0
+offset_top = 496.0
+offset_right = 1152.0
+offset_bottom = 801.0
+pivot_offset = Vector2(191, 152)
+size_flags_horizontal = 4
+
+[node name="Button" type="Button" parent="pages/correct_request/card_fake2"]
+layout_mode = 0
+offset_left = 374.0
+offset_right = 436.0
+offset_bottom = 57.0
+theme = ExtResource("2_yviea")
+theme_type_variation = &"ButtonCardRequest"
+theme_override_styles/hover = SubResource("StyleBoxFlat_lghri")
+button_mask = 0
+text = "✔"
+alignment = 2
+
+[node name="card" type="Panel" parent="pages/correct_request/card_fake2"]
+layout_mode = 0
+offset_right = 383.0
+offset_bottom = 305.0
+size_flags_horizontal = 4
+theme = ExtResource("2_yviea")
+metadata/_edit_group_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="pages/correct_request/card_fake2/card"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 9.0
+offset_right = 374.0
+offset_bottom = 296.0
+
+[node name="header" type="Label" parent="pages/correct_request/card_fake2/card/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="pages/correct_request/card_fake2/card/VBoxContainer"]
+custom_minimum_size = Vector2(0, 121)
+layout_mode = 2
+alignment = 1
+
+[node name="slot_fake_0" type="Panel" parent="pages/correct_request/card_fake2/card/VBoxContainer/HBoxContainer"]
+z_index = 1
+custom_minimum_size = Vector2(119, 182)
+layout_mode = 2
+
+[node name="card_fake" type="Panel" parent="pages/correct_request/card_fake2/card/VBoxContainer/HBoxContainer/slot_fake_0"]
+layout_mode = 0
+offset_right = 119.0
+offset_bottom = 181.999
+pivot_offset = Vector2(39, 60)
+
+[node name="Label" type="Label" parent="pages/correct_request/card_fake2/card/VBoxContainer/HBoxContainer/slot_fake_0/card_fake"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 21.0
+offset_right = 108.0
+offset_bottom = 196.0
+theme_override_font_sizes/font_size = 128
+text = "2"
+
+[node name="slot_fake_1" type="Panel" parent="pages/correct_request/card_fake2/card/VBoxContainer/HBoxContainer"]
+z_index = 1
+custom_minimum_size = Vector2(119, 182)
+layout_mode = 2
+
+[node name="card_fake" type="Panel" parent="pages/correct_request/card_fake2/card/VBoxContainer/HBoxContainer/slot_fake_1"]
+layout_mode = 0
+offset_right = 119.0
+offset_bottom = 181.999
+pivot_offset = Vector2(39, 60)
+
+[node name="Label" type="Label" parent="pages/correct_request/card_fake2/card/VBoxContainer/HBoxContainer/slot_fake_1/card_fake"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 21.0
+offset_right = 108.0
+offset_bottom = 196.0
+theme_override_font_sizes/font_size = 128
+text = "4"
+
+[node name="footer" type="Label" parent="pages/correct_request/card_fake2/card/VBoxContainer"]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+theme_type_variation = &"HeaderSmall"
+theme_override_font_sizes/font_size = 18
+text = "A double digit number"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Label" type="Label" parent="pages/correct_request/card_fake2"]
+layout_mode = 0
+offset_top = 340.0
+offset_right = 383.0
+offset_bottom = 515.0
+theme_override_font_sizes/font_size = 128
+text = "✔"
+horizontal_alignment = 1
+
+[node name="card_fake3" type="Control" parent="pages/correct_request"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1345.0
+offset_top = 496.0
+offset_right = 1728.0
+offset_bottom = 801.0
+pivot_offset = Vector2(191, 152)
+size_flags_horizontal = 4
+
+[node name="Button" type="Button" parent="pages/correct_request/card_fake3"]
+layout_mode = 0
+offset_left = 374.0
+offset_right = 436.0
+offset_bottom = 57.0
+theme = ExtResource("2_yviea")
+theme_type_variation = &"ButtonCardRequest"
+theme_override_styles/hover = SubResource("StyleBoxFlat_lghri")
+button_mask = 0
+text = "✔"
+alignment = 2
+
+[node name="card" type="Panel" parent="pages/correct_request/card_fake3"]
+layout_mode = 0
+offset_right = 383.0
+offset_bottom = 305.0
+size_flags_horizontal = 4
+theme = ExtResource("2_yviea")
+metadata/_edit_group_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="pages/correct_request/card_fake3/card"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 9.0
+offset_right = 374.0
+offset_bottom = 296.0
+
+[node name="header" type="Label" parent="pages/correct_request/card_fake3/card/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="pages/correct_request/card_fake3/card/VBoxContainer"]
+custom_minimum_size = Vector2(0, 121)
+layout_mode = 2
+alignment = 1
+
+[node name="slot_fake_0" type="Panel" parent="pages/correct_request/card_fake3/card/VBoxContainer/HBoxContainer"]
+z_index = 1
+custom_minimum_size = Vector2(119, 182)
+layout_mode = 2
+
+[node name="card_fake" type="Panel" parent="pages/correct_request/card_fake3/card/VBoxContainer/HBoxContainer/slot_fake_0"]
+layout_mode = 0
+offset_right = 119.0
+offset_bottom = 181.999
+pivot_offset = Vector2(39, 60)
+
+[node name="Label" type="Label" parent="pages/correct_request/card_fake3/card/VBoxContainer/HBoxContainer/slot_fake_0/card_fake"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 21.0
+offset_right = 108.0
+offset_bottom = 196.0
+theme_override_font_sizes/font_size = 128
+text = "0"
+
+[node name="slot_fake_1" type="Panel" parent="pages/correct_request/card_fake3/card/VBoxContainer/HBoxContainer"]
+z_index = 1
+custom_minimum_size = Vector2(119, 182)
+layout_mode = 2
+
+[node name="card_fake" type="Panel" parent="pages/correct_request/card_fake3/card/VBoxContainer/HBoxContainer/slot_fake_1"]
+layout_mode = 0
+offset_right = 119.0
+offset_bottom = 181.999
+pivot_offset = Vector2(39, 60)
+
+[node name="Label" type="Label" parent="pages/correct_request/card_fake3/card/VBoxContainer/HBoxContainer/slot_fake_1/card_fake"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 21.0
+offset_right = 108.0
+offset_bottom = 196.0
+theme_override_font_sizes/font_size = 128
+text = "3"
+
+[node name="footer" type="Label" parent="pages/correct_request/card_fake3/card/VBoxContainer"]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+theme_type_variation = &"HeaderSmall"
+theme_override_font_sizes/font_size = 18
+text = "A double digit number"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Label" type="Label" parent="pages/correct_request/card_fake3"]
+layout_mode = 0
+offset_top = 335.0
+offset_right = 383.0
+offset_bottom = 510.0
+theme_override_font_sizes/font_size = 128
+text = "❌"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="pages/correct_request"]
+offset_left = 267.0
+offset_top = 145.0
+offset_right = 1653.0
+offset_bottom = 424.0
+theme_override_font_sizes/font_size = 65
 text = "To complete a request, either enter the number on the top of the card, or enter a valid number within the range."
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="page3" type="Node2D" parent="pages"]
+[node name="strikes" type="Node2D" parent="pages"]
 visible = false
 
-[node name="Label" type="Label" parent="pages/page3"]
-offset_left = 60.0
-offset_top = 215.0
-offset_right = 1860.0
-offset_bottom = 427.0
-theme_override_font_sizes/font_size = 75
-text = "To find out the range of valid numbers, check the request's description."
+[node name="card_fake" type="Control" parent="pages/strikes"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 193.0
+offset_top = 496.0
+offset_right = 576.0
+offset_bottom = 801.0
+pivot_offset = Vector2(191, 152)
+size_flags_horizontal = 4
+
+[node name="Button" type="Button" parent="pages/strikes/card_fake"]
+layout_mode = 0
+offset_left = 374.0
+offset_right = 436.0
+offset_bottom = 57.0
+theme = ExtResource("2_yviea")
+theme_type_variation = &"ButtonCardRequest"
+theme_override_styles/hover = SubResource("StyleBoxFlat_lghri")
+button_mask = 0
+text = "✔"
+alignment = 2
+
+[node name="card" type="Panel" parent="pages/strikes/card_fake"]
+layout_mode = 0
+offset_right = 383.0
+offset_bottom = 305.0
+size_flags_horizontal = 4
+theme = ExtResource("2_yviea")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="pages/strikes/card_fake/card"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 9.0
+offset_right = 374.0
+offset_bottom = 296.0
+
+[node name="header" type="Label" parent="pages/strikes/card_fake/card/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "34"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="pages/strikes/card_fake/card/VBoxContainer"]
+custom_minimum_size = Vector2(0, 121)
+layout_mode = 2
+alignment = 1
+
+[node name="slot_fake_0" type="Panel" parent="pages/strikes/card_fake/card/VBoxContainer/HBoxContainer"]
+z_index = 1
+custom_minimum_size = Vector2(119, 182)
+layout_mode = 2
+
+[node name="slot_fake_1" type="Panel" parent="pages/strikes/card_fake/card/VBoxContainer/HBoxContainer"]
+z_index = 1
+custom_minimum_size = Vector2(119, 182)
+layout_mode = 2
+
+[node name="card_fake" type="Panel" parent="pages/strikes/card_fake/card/VBoxContainer/HBoxContainer/slot_fake_1"]
+layout_mode = 0
+offset_right = 119.0
+offset_bottom = 181.999
+pivot_offset = Vector2(39, 60)
+
+[node name="Label" type="Label" parent="pages/strikes/card_fake/card/VBoxContainer/HBoxContainer/slot_fake_1/card_fake"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 21.0
+offset_right = 108.0
+offset_bottom = 196.0
+theme_override_font_sizes/font_size = 128
+text = "0"
+
+[node name="footer" type="Label" parent="pages/strikes/card_fake/card/VBoxContainer"]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+theme_type_variation = &"HeaderSmall"
+theme_override_font_sizes/font_size = 18
+text = "An even number"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="strike_display" type="Label" parent="pages/strikes/card_fake"]
+layout_mode = 0
+offset_left = 383.0
+offset_top = 65.0
+offset_right = 430.0
+offset_bottom = 173.0
+theme_override_font_sizes/font_size = 34
+text = "❌"
+horizontal_alignment = 1
+autowrap_mode = 1
+
+[node name="card_fake2" type="Control" parent="pages/strikes"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 769.0
+offset_top = 496.0
+offset_right = 1152.0
+offset_bottom = 801.0
+pivot_offset = Vector2(191, 152)
+size_flags_horizontal = 4
+
+[node name="Button" type="Button" parent="pages/strikes/card_fake2"]
+layout_mode = 0
+offset_left = 374.0
+offset_right = 436.0
+offset_bottom = 57.0
+theme = ExtResource("2_yviea")
+theme_type_variation = &"ButtonCardRequest"
+theme_override_styles/hover = SubResource("StyleBoxFlat_lghri")
+button_mask = 0
+text = "✔"
+alignment = 2
+
+[node name="card" type="Panel" parent="pages/strikes/card_fake2"]
+layout_mode = 0
+offset_right = 383.0
+offset_bottom = 305.0
+size_flags_horizontal = 4
+theme = ExtResource("2_yviea")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="pages/strikes/card_fake2/card"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 9.0
+offset_right = 374.0
+offset_bottom = 296.0
+
+[node name="header" type="Label" parent="pages/strikes/card_fake2/card/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "34"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="pages/strikes/card_fake2/card/VBoxContainer"]
+custom_minimum_size = Vector2(0, 121)
+layout_mode = 2
+alignment = 1
+
+[node name="slot_fake_0" type="Panel" parent="pages/strikes/card_fake2/card/VBoxContainer/HBoxContainer"]
+z_index = 1
+custom_minimum_size = Vector2(119, 182)
+layout_mode = 2
+
+[node name="card_fake" type="Panel" parent="pages/strikes/card_fake2/card/VBoxContainer/HBoxContainer/slot_fake_0"]
+layout_mode = 0
+offset_right = 119.0
+offset_bottom = 181.999
+pivot_offset = Vector2(39, 60)
+
+[node name="Label" type="Label" parent="pages/strikes/card_fake2/card/VBoxContainer/HBoxContainer/slot_fake_0/card_fake"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 21.0
+offset_right = 108.0
+offset_bottom = 196.0
+theme_override_font_sizes/font_size = 128
+text = "2"
+
+[node name="slot_fake_1" type="Panel" parent="pages/strikes/card_fake2/card/VBoxContainer/HBoxContainer"]
+z_index = 1
+custom_minimum_size = Vector2(119, 182)
+layout_mode = 2
+
+[node name="card_fake" type="Panel" parent="pages/strikes/card_fake2/card/VBoxContainer/HBoxContainer/slot_fake_1"]
+layout_mode = 0
+offset_right = 119.0
+offset_bottom = 181.999
+pivot_offset = Vector2(39, 60)
+
+[node name="Label" type="Label" parent="pages/strikes/card_fake2/card/VBoxContainer/HBoxContainer/slot_fake_1/card_fake"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 21.0
+offset_right = 108.0
+offset_bottom = 196.0
+theme_override_font_sizes/font_size = 128
+text = "7"
+
+[node name="footer" type="Label" parent="pages/strikes/card_fake2/card/VBoxContainer"]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+theme_type_variation = &"HeaderSmall"
+theme_override_font_sizes/font_size = 18
+text = "An even number"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="strike_display" type="Label" parent="pages/strikes/card_fake2"]
+layout_mode = 0
+offset_left = 383.0
+offset_top = 65.0
+offset_right = 430.0
+offset_bottom = 173.0
+theme_override_font_sizes/font_size = 34
+text = "❌❌"
+horizontal_alignment = 1
+autowrap_mode = 1
+
+[node name="popup_panel" type="Panel" parent="pages/strikes"]
+offset_left = 1345.0
+offset_top = 796.0
+offset_right = 1728.0
+offset_bottom = 847.0
+theme = ExtResource("2_yviea")
+theme_override_styles/panel = ExtResource("10_iretj")
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="pages/strikes/popup_panel"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 378.0
+offset_bottom = 47.0
+theme = ExtResource("2_yviea")
+theme_override_font_sizes/font_size = 30
+text = "Fail!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="card_fake3" type="Control" parent="pages/strikes"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1345.0
+offset_top = 496.0
+offset_right = 1728.0
+offset_bottom = 801.0
+pivot_offset = Vector2(191, 152)
+size_flags_horizontal = 4
+
+[node name="Button" type="Button" parent="pages/strikes/card_fake3"]
+layout_mode = 0
+offset_left = 374.0
+offset_right = 436.0
+offset_bottom = 57.0
+theme = ExtResource("2_yviea")
+theme_type_variation = &"ButtonCardRequest"
+theme_override_styles/hover = SubResource("StyleBoxFlat_lghri")
+button_mask = 0
+text = "✔"
+alignment = 2
+
+[node name="card" type="Panel" parent="pages/strikes/card_fake3"]
+layout_mode = 0
+offset_right = 383.0
+offset_bottom = 305.0
+size_flags_horizontal = 4
+theme = ExtResource("2_yviea")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="pages/strikes/card_fake3/card"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 9.0
+offset_right = 374.0
+offset_bottom = 296.0
+
+[node name="header" type="Label" parent="pages/strikes/card_fake3/card/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "34"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="pages/strikes/card_fake3/card/VBoxContainer"]
+custom_minimum_size = Vector2(0, 121)
+layout_mode = 2
+alignment = 1
+
+[node name="slot_fake_0" type="Panel" parent="pages/strikes/card_fake3/card/VBoxContainer/HBoxContainer"]
+z_index = 1
+custom_minimum_size = Vector2(119, 182)
+layout_mode = 2
+
+[node name="slot_fake_1" type="Panel" parent="pages/strikes/card_fake3/card/VBoxContainer/HBoxContainer"]
+z_index = 1
+custom_minimum_size = Vector2(119, 182)
+layout_mode = 2
+
+[node name="footer" type="Label" parent="pages/strikes/card_fake3/card/VBoxContainer"]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+theme_type_variation = &"HeaderSmall"
+theme_override_font_sizes/font_size = 18
+text = "An even number"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="strike_display" type="Label" parent="pages/strikes/card_fake3"]
+layout_mode = 0
+offset_left = 383.0
+offset_top = 65.0
+offset_right = 430.0
+offset_bottom = 173.0
+theme_override_font_sizes/font_size = 34
+text = "❌❌❌"
+horizontal_alignment = 1
+autowrap_mode = 1
+
+[node name="Label" type="Label" parent="pages/strikes"]
+offset_left = 203.0
+offset_top = 145.0
+offset_right = 1717.0
+offset_bottom = 424.0
+theme_override_font_sizes/font_size = 65
+text = "If slots are not filled, or you submit an invalid number, you will get a strike on that request. Three strikes, and the request is failed."
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="page4" type="Node2D" parent="pages"]
+[node name="number_cards" type="Node2D" parent="pages"]
 visible = false
 
-[node name="Label" type="Label" parent="pages/page4"]
-offset_left = 60.0
-offset_top = 215.0
-offset_right = 1860.0
-offset_bottom = 533.0
+[node name="cards_fake" type="Node2D" parent="pages/number_cards"]
+position = Vector2(722, 491)
+
+[node name="num_card_fake-0" type="Control" parent="pages/number_cards/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 38.6666
+offset_top = 1.52588e-05
+offset_right = 38.6666
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/number_cards/cards_fake/num_card_fake-0"]
+layout_mode = 0
+offset_left = -39.0
+offset_right = 40.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/number_cards/cards_fake/num_card_fake-0/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
 theme_override_font_sizes/font_size = 75
-text = "Points obtained from requests will vary depending on the slot amount and how fast you complete the request."
+text = "0"
+
+[node name="num_card_fake-1" type="Control" parent="pages/number_cards/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 38.6666
+offset_top = 1.52588e-05
+offset_right = 38.6666
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/number_cards/cards_fake/num_card_fake-1"]
+layout_mode = 0
+offset_left = 3.0
+offset_right = 82.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/number_cards/cards_fake/num_card_fake-1/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "9"
+
+[node name="num_card_fake-2" type="Control" parent="pages/number_cards/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 122.667
+offset_top = 1.52588e-05
+offset_right = 122.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/number_cards/cards_fake/num_card_fake-2"]
+layout_mode = 0
+offset_left = -39.0
+offset_right = 40.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/number_cards/cards_fake/num_card_fake-2/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "6"
+
+[node name="num_card_fake-3" type="Control" parent="pages/number_cards/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 122.667
+offset_top = 1.52588e-05
+offset_right = 122.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/number_cards/cards_fake/num_card_fake-3"]
+layout_mode = 0
+offset_left = 3.0
+offset_right = 82.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/number_cards/cards_fake/num_card_fake-3/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "4"
+
+[node name="num_card_fake-4" type="Control" parent="pages/number_cards/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 206.667
+offset_top = 1.52588e-05
+offset_right = 206.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/number_cards/cards_fake/num_card_fake-4"]
+layout_mode = 0
+offset_left = -39.0
+offset_right = 40.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/number_cards/cards_fake/num_card_fake-4/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "7"
+
+[node name="num_card_fake-5" type="Control" parent="pages/number_cards/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 206.667
+offset_top = 1.52588e-05
+offset_right = 206.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/number_cards/cards_fake/num_card_fake-5"]
+layout_mode = 0
+offset_left = 3.0
+offset_right = 82.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/number_cards/cards_fake/num_card_fake-5/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "5"
+
+[node name="num_card_fake-6" type="Control" parent="pages/number_cards/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 290.667
+offset_top = 1.52588e-05
+offset_right = 290.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/number_cards/cards_fake/num_card_fake-6"]
+layout_mode = 0
+offset_left = -39.0
+offset_right = 40.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/number_cards/cards_fake/num_card_fake-6/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "3"
+
+[node name="num_card_fake-7" type="Control" parent="pages/number_cards/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 290.667
+offset_top = 1.52588e-05
+offset_right = 290.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/number_cards/cards_fake/num_card_fake-7"]
+layout_mode = 0
+offset_left = 3.0
+offset_right = 82.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/number_cards/cards_fake/num_card_fake-7/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "0"
+
+[node name="num_card_fake-8" type="Control" parent="pages/number_cards/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 374.667
+offset_top = 1.52588e-05
+offset_right = 374.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/number_cards/cards_fake/num_card_fake-8"]
+layout_mode = 0
+offset_left = -39.0
+offset_right = 40.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/number_cards/cards_fake/num_card_fake-8/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "1"
+
+[node name="num_card_fake-9" type="Control" parent="pages/number_cards/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 374.667
+offset_top = 1.52588e-05
+offset_right = 374.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/number_cards/cards_fake/num_card_fake-9"]
+layout_mode = 0
+offset_left = 3.0
+offset_right = 82.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/number_cards/cards_fake/num_card_fake-9/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "0"
+
+[node name="num_card_fake-10" type="Control" parent="pages/number_cards/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 458.667
+offset_top = 1.52588e-05
+offset_right = 458.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/number_cards/cards_fake/num_card_fake-10"]
+layout_mode = 0
+offset_left = -39.0
+offset_right = 40.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/number_cards/cards_fake/num_card_fake-10/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "6"
+
+[node name="num_card_fake-11" type="Control" parent="pages/number_cards/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 458.667
+offset_top = 1.52588e-05
+offset_right = 458.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/number_cards/cards_fake/num_card_fake-11"]
+layout_mode = 0
+offset_left = 3.0
+offset_right = 82.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/number_cards/cards_fake/num_card_fake-11/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "7"
+
+[node name="num_card_fake-12" type="Control" parent="pages/number_cards/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 542.667
+offset_top = 1.52588e-05
+offset_right = 542.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/number_cards/cards_fake/num_card_fake-12"]
+layout_mode = 0
+offset_left = -39.0
+offset_right = 40.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/number_cards/cards_fake/num_card_fake-12/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "1"
+
+[node name="num_card_fake-13" type="Control" parent="pages/number_cards/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 542.667
+offset_top = 1.52588e-05
+offset_right = 542.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/number_cards/cards_fake/num_card_fake-13"]
+layout_mode = 0
+offset_left = 3.0
+offset_right = 82.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/number_cards/cards_fake/num_card_fake-13/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "0"
+
+[node name="num_card_fake-14" type="Control" parent="pages/number_cards/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 626.667
+offset_top = 1.52588e-05
+offset_right = 626.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/number_cards/cards_fake/num_card_fake-14"]
+layout_mode = 0
+offset_left = -39.0
+offset_right = 40.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/number_cards/cards_fake/num_card_fake-14/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "8"
+
+[node name="num_card_fake-15" type="Control" parent="pages/number_cards/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 626.667
+offset_top = 1.52588e-05
+offset_right = 626.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/number_cards/cards_fake/num_card_fake-15"]
+layout_mode = 0
+offset_left = 3.0
+offset_right = 82.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/number_cards/cards_fake/num_card_fake-15/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "7"
+
+[node name="num_card_fake-16" type="Control" parent="pages/number_cards/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 710.667
+offset_top = 1.52588e-05
+offset_right = 710.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/number_cards/cards_fake/num_card_fake-16"]
+layout_mode = 0
+offset_left = -39.0
+offset_right = 40.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/number_cards/cards_fake/num_card_fake-16/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "0"
+
+[node name="num_card_fake-17" type="Control" parent="pages/number_cards/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 710.667
+offset_top = 1.52588e-05
+offset_right = 710.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/number_cards/cards_fake/num_card_fake-17"]
+layout_mode = 0
+offset_left = 3.0
+offset_right = 82.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/number_cards/cards_fake/num_card_fake-17/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "3"
+
+[node name="num_card_fake-18" type="Control" parent="pages/number_cards/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 794.667
+offset_top = 1.52588e-05
+offset_right = 794.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/number_cards/cards_fake/num_card_fake-18"]
+layout_mode = 0
+offset_left = -39.0
+offset_right = 40.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/number_cards/cards_fake/num_card_fake-18/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "2"
+
+[node name="num_card_fake-19" type="Control" parent="pages/number_cards/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 794.667
+offset_top = 1.52588e-05
+offset_right = 794.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/number_cards/cards_fake/num_card_fake-19"]
+layout_mode = 0
+offset_left = 3.0
+offset_right = 82.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/number_cards/cards_fake/num_card_fake-19/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "0"
+
+[node name="Node2D" type="Node2D" parent="pages/number_cards/cards_fake"]
+position = Vector2(877, 0)
+
+[node name="icon" type="Label" parent="pages/number_cards"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 283.0
+offset_top = 462.0
+offset_right = 459.0
+offset_bottom = 637.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_yviea")
+theme_override_font_sizes/font_size = 128
+text = "🧺"
+vertical_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="pages/number_cards"]
+position = Vector2(589, 478)
+rotation = -0.310009
+scale = Vector2(1.38961, 1.12162)
+texture = ExtResource("4_w14yl")
+
+[node name="Label" type="Label" parent="pages/number_cards"]
+offset_left = 203.0
+offset_top = 145.0
+offset_right = 1717.0
+offset_bottom = 331.0
+theme_override_font_sizes/font_size = 65
+text = "Number cards will be given periodically, and you can only hold 20 of them."
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="page5" type="Node2D" parent="pages"]
-visible = false
-
-[node name="Label" type="Label" parent="pages/page5"]
-offset_left = 60.0
-offset_top = 215.0
-offset_right = 1860.0
-offset_bottom = 427.0
-theme_override_font_sizes/font_size = 75
-text = "Requests only last for a short while, so be sure to complete them.  If you don't, you lose points."
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="page6" type="Node2D" parent="pages"]
-visible = false
-
-[node name="Label" type="Label" parent="pages/page6"]
-offset_left = 60.0
-offset_top = 215.0
-offset_right = 1860.0
-offset_bottom = 427.0
-theme_override_font_sizes/font_size = 75
-text = "To submit your numbers, click the checkmark button on the top right corner."
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="page7" type="Node2D" parent="pages"]
-visible = false
-
-[node name="Label" type="Label" parent="pages/page7"]
-offset_left = 60.0
-offset_top = 215.0
-offset_right = 1860.0
-offset_bottom = 427.0
-theme_override_font_sizes/font_size = 75
-text = "If the slots are not filled, or you submit an invalid number, you will get a strike on that request."
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="Label2" type="Label" parent="pages/page7"]
-offset_left = 60.0
-offset_top = 495.0
-offset_right = 1860.0
-offset_bottom = 707.0
-theme_override_font_sizes/font_size = 75
-text = "Three strikes, and the request is failed."
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="page8" type="Node2D" parent="pages"]
-visible = false
-
-[node name="Label" type="Label" parent="pages/page8"]
-offset_left = 60.0
-offset_top = 215.0
-offset_right = 1860.0
-offset_bottom = 427.0
-theme_override_font_sizes/font_size = 75
-text = "Number cards will be given periodically, and you can only hold a certain amount."
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="Label2" type="Label" parent="pages/page8"]
-offset_left = 60.0
-offset_top = 495.0
-offset_right = 1860.0
-offset_bottom = 707.0
-theme_override_font_sizes/font_size = 75
+[node name="Label2" type="Label" parent="pages/number_cards"]
+offset_left = 203.0
+offset_top = 737.0
+offset_right = 1717.0
+offset_bottom = 923.0
+theme_override_font_sizes/font_size = 65
 text = "If it looks like you can't hold anymore, consider dragging them into the trash."
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="page9" type="Node2D" parent="pages"]
+[node name="trash_can" type="Node2D" parent="pages"]
+
+[node name="Sprite2D" type="Sprite2D" parent="pages/trash_can"]
+position = Vector2(804, 405)
+rotation = -1.40988
+texture = ExtResource("5_76uye")
+flip_h = true
+
+[node name="Sprite2D2" type="Sprite2D" parent="pages/trash_can"]
+position = Vector2(1187, 459)
+rotation = 2.5351
+scale = Vector2(0.887121, 0.627627)
+texture = ExtResource("11_bw2ug")
+flip_v = true
+
+[node name="cards_fake" type="Node2D" parent="pages/trash_can"]
+position = Vector2(514, 190)
+
+[node name="num_card_fake-0" type="Control" parent="pages/trash_can/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 38.6666
+offset_top = 1.52588e-05
+offset_right = 38.6666
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/trash_can/cards_fake/num_card_fake-0"]
+layout_mode = 0
+offset_left = -39.0
+offset_right = 40.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/trash_can/cards_fake/num_card_fake-0/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "0"
+
+[node name="num_card_fake-1" type="Control" parent="pages/trash_can/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 38.6666
+offset_top = 1.52588e-05
+offset_right = 38.6666
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/trash_can/cards_fake/num_card_fake-1"]
+layout_mode = 0
+offset_left = 3.0
+offset_right = 82.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/trash_can/cards_fake/num_card_fake-1/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "9"
+
+[node name="num_card_fake-2" type="Control" parent="pages/trash_can/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 122.667
+offset_top = 1.52588e-05
+offset_right = 122.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/trash_can/cards_fake/num_card_fake-2"]
+layout_mode = 0
+offset_left = -39.0
+offset_right = 40.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/trash_can/cards_fake/num_card_fake-2/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "6"
+
+[node name="num_card_fake-3" type="Control" parent="pages/trash_can/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 122.667
+offset_top = 1.52588e-05
+offset_right = 122.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/trash_can/cards_fake/num_card_fake-3"]
+layout_mode = 0
+offset_left = 3.0
+offset_right = 82.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/trash_can/cards_fake/num_card_fake-3/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "4"
+
+[node name="num_card_fake-4" type="Control" parent="pages/trash_can/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 206.667
+offset_top = 1.52588e-05
+offset_right = 206.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/trash_can/cards_fake/num_card_fake-4"]
+layout_mode = 0
+offset_left = -39.0
+offset_right = 40.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/trash_can/cards_fake/num_card_fake-4/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "7"
+
+[node name="num_card_fake-5" type="Control" parent="pages/trash_can/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 206.667
+offset_top = 1.52588e-05
+offset_right = 206.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/trash_can/cards_fake/num_card_fake-5"]
+layout_mode = 0
+offset_left = 3.0
+offset_right = 82.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/trash_can/cards_fake/num_card_fake-5/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "5"
+
+[node name="num_card_fake-6" type="Control" parent="pages/trash_can/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 290.667
+offset_top = 1.52588e-05
+offset_right = 290.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/trash_can/cards_fake/num_card_fake-6"]
+layout_mode = 0
+offset_left = -39.0
+offset_right = 40.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/trash_can/cards_fake/num_card_fake-6/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "3"
+
+[node name="num_card_fake-7" type="Control" parent="pages/trash_can/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 290.667
+offset_top = 1.52588e-05
+offset_right = 290.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/trash_can/cards_fake/num_card_fake-7"]
+layout_mode = 0
+offset_left = 3.0
+offset_right = 82.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/trash_can/cards_fake/num_card_fake-7/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "0"
+
+[node name="num_card_fake-8" type="Control" parent="pages/trash_can/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 374.667
+offset_top = 1.52588e-05
+offset_right = 374.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/trash_can/cards_fake/num_card_fake-8"]
+layout_mode = 0
+offset_left = -39.0
+offset_right = 40.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/trash_can/cards_fake/num_card_fake-8/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "1"
+
+[node name="num_card_fake-9" type="Control" parent="pages/trash_can/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 374.667
+offset_top = 3.05176e-05
+offset_right = 374.667
+offset_bottom = 3.05176e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/trash_can/cards_fake/num_card_fake-9"]
+layout_mode = 0
+offset_left = 3.0
+offset_right = 82.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/trash_can/cards_fake/num_card_fake-9/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "0"
+
+[node name="num_card_fake-10" type="Control" parent="pages/trash_can/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 458.667
+offset_top = 1.52588e-05
+offset_right = 458.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/trash_can/cards_fake/num_card_fake-10"]
+layout_mode = 0
+offset_left = -39.0
+offset_right = 40.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/trash_can/cards_fake/num_card_fake-10/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "6"
+
+[node name="num_card_fake-11" type="Control" parent="pages/trash_can/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 458.667
+offset_top = 1.52588e-05
+offset_right = 458.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/trash_can/cards_fake/num_card_fake-11"]
+layout_mode = 0
+offset_left = 3.0
+offset_right = 82.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/trash_can/cards_fake/num_card_fake-11/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "7"
+
+[node name="num_card_fake-12" type="Control" parent="pages/trash_can/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 542.667
+offset_top = 1.52588e-05
+offset_right = 542.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/trash_can/cards_fake/num_card_fake-12"]
+layout_mode = 0
+offset_left = -39.0
+offset_right = 40.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/trash_can/cards_fake/num_card_fake-12/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "1"
+
+[node name="num_card_fake-13" type="Control" parent="pages/trash_can/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 542.667
+offset_top = 1.52588e-05
+offset_right = 542.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/trash_can/cards_fake/num_card_fake-13"]
+layout_mode = 0
+offset_left = 3.0
+offset_right = 82.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/trash_can/cards_fake/num_card_fake-13/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "0"
+
+[node name="num_card_fake-14" type="Control" parent="pages/trash_can/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 626.667
+offset_top = 1.52588e-05
+offset_right = 626.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/trash_can/cards_fake/num_card_fake-14"]
+layout_mode = 0
+offset_left = -39.0
+offset_right = 40.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/trash_can/cards_fake/num_card_fake-14/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "8"
+
+[node name="num_card_fake-15" type="Control" parent="pages/trash_can/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 626.667
+offset_top = 1.52588e-05
+offset_right = 626.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/trash_can/cards_fake/num_card_fake-15"]
+layout_mode = 0
+offset_left = 3.0
+offset_right = 82.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/trash_can/cards_fake/num_card_fake-15/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "7"
+
+[node name="num_card_fake-16" type="Control" parent="pages/trash_can/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 710.667
+offset_top = 1.52588e-05
+offset_right = 710.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/trash_can/cards_fake/num_card_fake-16"]
+layout_mode = 0
+offset_left = -39.0
+offset_right = 40.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/trash_can/cards_fake/num_card_fake-16/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "0"
+
+[node name="num_card_fake-17" type="Control" parent="pages/trash_can/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 710.667
+offset_top = 1.52588e-05
+offset_right = 710.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/trash_can/cards_fake/num_card_fake-17"]
+layout_mode = 0
+offset_left = 3.0
+offset_right = 82.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/trash_can/cards_fake/num_card_fake-17/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "3"
+
+[node name="num_card_fake-18" type="Control" parent="pages/trash_can/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 794.667
+offset_top = 1.52588e-05
+offset_right = 794.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/trash_can/cards_fake/num_card_fake-18"]
+layout_mode = 0
+offset_left = -39.0
+offset_right = 40.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/trash_can/cards_fake/num_card_fake-18/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "2"
+
+[node name="num_card_fake-19" type="Control" parent="pages/trash_can/cards_fake"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 794.667
+offset_top = 1.52588e-05
+offset_right = 794.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="border" type="Panel" parent="pages/trash_can/cards_fake/num_card_fake-19"]
+layout_mode = 0
+offset_left = 3.0
+offset_right = 82.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+
+[node name="number" type="Label" parent="pages/trash_can/cards_fake/num_card_fake-19/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "0"
+
+[node name="Node2D" type="Node2D" parent="pages/trash_can/cards_fake"]
+position = Vector2(877, 0)
+
+[node name="cards_fake2" type="Node2D" parent="pages/trash_can"]
+position = Vector2(514, 550)
+
+[node name="num_card_fake-5" type="Control" parent="pages/trash_can/cards_fake2"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 206.667
+offset_top = 1.52588e-05
+offset_right = 206.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true
+metadata/_edit_group_ = true
+
+[node name="border" type="Panel" parent="pages/trash_can/cards_fake2/num_card_fake-5"]
+layout_mode = 0
+offset_left = 3.0
+offset_right = 82.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+metadata/_edit_use_anchors_ = true
+
+[node name="number" type="Label" parent="pages/trash_can/cards_fake2/num_card_fake-5/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "5"
+metadata/_edit_use_anchors_ = true
+
+[node name="num_card_fake-6" type="Control" parent="pages/trash_can/cards_fake2"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 290.667
+offset_top = 1.52588e-05
+offset_right = 290.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true
+metadata/_edit_group_ = true
+
+[node name="border" type="Panel" parent="pages/trash_can/cards_fake2/num_card_fake-6"]
+layout_mode = 0
+offset_left = -39.0
+offset_right = 40.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+metadata/_edit_use_anchors_ = true
+
+[node name="number" type="Label" parent="pages/trash_can/cards_fake2/num_card_fake-6/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "3"
+metadata/_edit_use_anchors_ = true
+
+[node name="num_card_fake-7" type="Control" parent="pages/trash_can/cards_fake2"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 290.667
+offset_top = 1.52588e-05
+offset_right = 290.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true
+metadata/_edit_group_ = true
+
+[node name="border" type="Panel" parent="pages/trash_can/cards_fake2/num_card_fake-7"]
+layout_mode = 0
+offset_left = 3.0
+offset_right = 82.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+metadata/_edit_use_anchors_ = true
+
+[node name="number" type="Label" parent="pages/trash_can/cards_fake2/num_card_fake-7/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "0"
+metadata/_edit_use_anchors_ = true
+
+[node name="num_card_fake-8" type="Control" parent="pages/trash_can/cards_fake2"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 374.667
+offset_top = 1.52588e-05
+offset_right = 374.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true
+metadata/_edit_group_ = true
+
+[node name="border" type="Panel" parent="pages/trash_can/cards_fake2/num_card_fake-8"]
+layout_mode = 0
+offset_left = -39.0
+offset_right = 40.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+metadata/_edit_use_anchors_ = true
+
+[node name="number" type="Label" parent="pages/trash_can/cards_fake2/num_card_fake-8/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "1"
+metadata/_edit_use_anchors_ = true
+
+[node name="num_card_fake-9" type="Control" parent="pages/trash_can/cards_fake2"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 374.667
+offset_top = 3.05176e-05
+offset_right = 374.667
+offset_bottom = 3.05176e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true
+metadata/_edit_group_ = true
+
+[node name="border" type="Panel" parent="pages/trash_can/cards_fake2/num_card_fake-9"]
+layout_mode = 0
+offset_left = 3.0
+offset_right = 82.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+metadata/_edit_use_anchors_ = true
+
+[node name="number" type="Label" parent="pages/trash_can/cards_fake2/num_card_fake-9/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "0"
+metadata/_edit_use_anchors_ = true
+
+[node name="num_card_fake-10" type="Control" parent="pages/trash_can/cards_fake2"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 458.667
+offset_top = 1.52588e-05
+offset_right = 458.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true
+metadata/_edit_group_ = true
+
+[node name="border" type="Panel" parent="pages/trash_can/cards_fake2/num_card_fake-10"]
+layout_mode = 0
+offset_left = -39.0
+offset_right = 40.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+metadata/_edit_use_anchors_ = true
+
+[node name="number" type="Label" parent="pages/trash_can/cards_fake2/num_card_fake-10/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "6"
+metadata/_edit_use_anchors_ = true
+
+[node name="num_card_fake-11" type="Control" parent="pages/trash_can/cards_fake2"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 458.667
+offset_top = 1.52588e-05
+offset_right = 458.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true
+metadata/_edit_group_ = true
+
+[node name="border" type="Panel" parent="pages/trash_can/cards_fake2/num_card_fake-11"]
+layout_mode = 0
+offset_left = 3.0
+offset_right = 82.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+metadata/_edit_use_anchors_ = true
+
+[node name="number" type="Label" parent="pages/trash_can/cards_fake2/num_card_fake-11/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "7"
+metadata/_edit_use_anchors_ = true
+
+[node name="num_card_fake-12" type="Control" parent="pages/trash_can/cards_fake2"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 542.667
+offset_top = 1.52588e-05
+offset_right = 542.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true
+metadata/_edit_group_ = true
+
+[node name="border" type="Panel" parent="pages/trash_can/cards_fake2/num_card_fake-12"]
+layout_mode = 0
+offset_left = -39.0
+offset_right = 40.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+metadata/_edit_use_anchors_ = true
+
+[node name="number" type="Label" parent="pages/trash_can/cards_fake2/num_card_fake-12/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "1"
+metadata/_edit_use_anchors_ = true
+
+[node name="num_card_fake-13" type="Control" parent="pages/trash_can/cards_fake2"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 542.667
+offset_top = 1.52588e-05
+offset_right = 542.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true
+metadata/_edit_group_ = true
+
+[node name="border" type="Panel" parent="pages/trash_can/cards_fake2/num_card_fake-13"]
+layout_mode = 0
+offset_left = 3.0
+offset_right = 82.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+metadata/_edit_use_anchors_ = true
+
+[node name="number" type="Label" parent="pages/trash_can/cards_fake2/num_card_fake-13/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "0"
+metadata/_edit_use_anchors_ = true
+
+[node name="num_card_fake-14" type="Control" parent="pages/trash_can/cards_fake2"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 626.667
+offset_top = 1.52588e-05
+offset_right = 626.667
+offset_bottom = 1.52588e-05
+size_flags_horizontal = 6
+size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true
+metadata/_edit_group_ = true
+
+[node name="border" type="Panel" parent="pages/trash_can/cards_fake2/num_card_fake-14"]
+layout_mode = 0
+offset_left = -39.0
+offset_right = 40.0
+offset_bottom = 121.0
+pivot_offset = Vector2(39, 60)
+theme = ExtResource("2_yviea")
+metadata/_edit_use_anchors_ = true
+
+[node name="number" type="Label" parent="pages/trash_can/cards_fake2/num_card_fake-14/border"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 75
+text = "8"
+metadata/_edit_use_anchors_ = true
+
+[node name="Node2D" type="Node2D" parent="pages/trash_can/cards_fake2"]
+position = Vector2(877, 0)
+
+[node name="icon" type="Label" parent="pages/trash_can"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 872.0
+offset_top = 356.0
+offset_right = 1048.0
+offset_bottom = 531.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_yviea")
+theme_override_font_sizes/font_size = 128
+text = "🧺"
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="pages/trash_can"]
+offset_left = 203.0
+offset_top = 737.0
+offset_right = 1717.0
+offset_bottom = 923.0
+theme_override_font_sizes/font_size = 65
+text = "Clicking on the trash can
+will delete half of your cards"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="hand_point" type="Label" parent="pages/trash_can"]
+custom_minimum_size = Vector2(0, 79)
+offset_left = 943.0
+offset_top = 475.0
+offset_right = 1046.0
+offset_bottom = 631.0
+rotation = -1.02876
+theme_override_font_sizes/font_size = 112
+text = "☝"
+vertical_alignment = 1
+
+[node name="game_duration" type="Node2D" parent="pages"]
 visible = false
 
-[node name="Label" type="Label" parent="pages/page9"]
-offset_left = 60.0
-offset_top = 215.0
-offset_right = 1860.0
-offset_bottom = 427.0
+[node name="Label" type="Label" parent="pages/game_duration"]
+offset_right = 1920.0
+offset_bottom = 936.0
 theme_override_font_sizes/font_size = 75
 text = "The game lasts around 2 minutes.  You can see the progress of the round at the bottom of the screen."
 horizontal_alignment = 1
+vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="page10" type="Node2D" parent="pages"]
+[node name="end" type="Node2D" parent="pages"]
 visible = false
 
-[node name="Label" type="Label" parent="pages/page10"]
-offset_left = 60.0
-offset_top = 215.0
-offset_right = 1860.0
-offset_bottom = 427.0
+[node name="Label" type="Label" parent="pages/end"]
+offset_right = 1920.0
+offset_bottom = 936.0
 theme_override_font_sizes/font_size = 75
-text = "Be sure to read the itch page description in case I add anything new there that I might have missed"
+text = "Have fun!"
 horizontal_alignment = 1
+vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="page_changers" type="Control" parent="."]
+[node name="buttons" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-theme = ExtResource("2_ma2ud")
+theme = ExtResource("2_yviea")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
-[node name="left" type="Button" parent="page_changers"]
+[node name="left_button" type="Button" parent="buttons"]
 custom_minimum_size = Vector2(150, 120)
 layout_mode = 2
-offset_left = 20.0
-offset_top = 940.0
-offset_right = 170.0
-offset_bottom = 1060.0
+offset_left = 12.0
+offset_top = 948.0
+offset_right = 162.0
+offset_bottom = 1068.0
 size_flags_horizontal = 6
+keep_pressed_outside = true
+script = ExtResource("15_t7itw")
+
+[node name="Label" type="Label" parent="buttons/left_button"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 14.0
+offset_right = 130.0
+offset_bottom = 117.0
+theme_type_variation = &"LabelButton"
 text = "<<"
 
-[node name="right" type="Button" parent="page_changers"]
+[node name="right_button" type="Button" parent="buttons"]
 custom_minimum_size = Vector2(150, 120)
 layout_mode = 2
-offset_left = 1750.0
-offset_top = 940.0
-offset_right = 1900.0
-offset_bottom = 1060.0
+offset_left = 1757.0
+offset_top = 948.0
+offset_right = 1907.0
+offset_bottom = 1068.0
+keep_pressed_outside = true
+script = ExtResource("15_t7itw")
+
+[node name="Label" type="Label" parent="buttons/right_button"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 14.0
+offset_right = 130.0
+offset_bottom = 117.0
+theme_type_variation = &"LabelButton"
 text = ">>"
 
-[node name="exit" type="Button" parent="."]
+[node name="exit_button" type="Button" parent="buttons"]
+layout_mode = 0
 offset_left = 1776.0
 offset_top = 19.0
 offset_right = 1901.0
 offset_bottom = 144.0
-theme = ExtResource("2_ma2ud")
+theme = ExtResource("2_yviea")
+keep_pressed_outside = true
+script = ExtResource("15_t7itw")
+
+[node name="Label" type="Label" parent="buttons/exit_button"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 15.0
+offset_right = 90.0
+offset_bottom = 118.0
+theme_type_variation = &"LabelButton"
 text = "X"
 
-[connection signal="pressed" from="page_changers/left" to="." method="_on_left_pressed"]
-[connection signal="pressed" from="page_changers/right" to="." method="_on_right_pressed"]
-[connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="buttons/left_button" to="." method="_on_left_button_pressed"]
+[connection signal="pressed" from="buttons/right_button" to="." method="_on_right_button_pressed"]
+[connection signal="pressed" from="buttons/exit_button" to="." method="_on_exit_button_pressed"]

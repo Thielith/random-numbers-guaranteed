@@ -1,19 +1,30 @@
-[gd_scene load_steps=16 format=3 uid="uid://1vxyjh06pv0c"]
+[gd_scene load_steps=22 format=3 uid="uid://1vxyjh06pv0c"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_v1oa5"]
 [ext_resource type="PackedScene" uid="uid://bflai8tmoma1t" path="res://ui/hud.tscn" id="2_e86e4"]
 [ext_resource type="Script" path="res://cards/trash_can.gd" id="2_enlsn"]
-[ext_resource type="Theme" uid="uid://o5p7cglq6qn" path="res://cards/theme_card.tres" id="2_tmoo5"]
-[ext_resource type="AudioStream" uid="uid://7rxgwcop3d0c" path="res://sounds/snd_card_trash.mp3" id="3_q6pxc"]
+[ext_resource type="Theme" uid="uid://o5p7cglq6qn" path="res://cards/theme_master.tres" id="3_wtf3w"]
 [ext_resource type="Script" path="res://cards/ProgressBar.gd" id="4_fabr2"]
+[ext_resource type="AudioStream" uid="uid://7rxgwcop3d0c" path="res://sounds/snd_card_trash.mp3" id="4_iavio"]
 [ext_resource type="Script" path="res://cards/card_area_position.gd" id="5_4stpx"]
-[ext_resource type="AudioStream" uid="uid://cox1cp20x6iqu" path="res://sounds/snd_card_1.mp3" id="7_ty2f7"]
-[ext_resource type="AudioStream" uid="uid://bj6lf3x8668fh" path="res://sounds/game.mp3" id="8_bhv4q"]
+[ext_resource type="AudioStream" uid="uid://cox1cp20x6iqu" path="res://sounds/snd_card_num_spawn.mp3" id="7_5jw8b"]
+[ext_resource type="AudioStream" uid="uid://dalfryh2ppojr" path="res://sounds/snd_card_req_spawn.mp3" id="7_m3xia"]
+[ext_resource type="Script" path="res://menus/button.gd" id="8_lkpqg"]
 [ext_resource type="Script" path="res://menus/pauseMenu.gd" id="10_x0b16"]
 [ext_resource type="Script" path="res://menus/round_summary_menu.gd" id="11_gcb22"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ucven"]
-size = Vector2(144, 146)
+size = Vector2(150, 154)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ltfw8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4inco"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ql8bx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_icnpv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_333iw"]
 
 [sub_resource type="Animation" id="Animation_7v41d"]
 length = 0.001
@@ -60,15 +71,14 @@ script = ExtResource("1_v1oa5")
 [node name="trash_can" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 105.0
-offset_top = 888.0
-offset_right = 105.0
-offset_bottom = 888.0
+offset_left = 113.0
+offset_top = 868.0
+offset_right = 113.0
+offset_bottom = 868.0
 script = ExtResource("2_enlsn")
-metadata/_edit_group_ = true
 
 [node name="Area2D" type="Area2D" parent="trash_can"]
-position = Vector2(0, 70)
+position = Vector2(1, 79)
 collision_layer = 2
 collision_mask = 4
 monitorable = false
@@ -84,20 +94,31 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -88.0
-offset_top = -7.5
-offset_right = 88.0
-offset_bottom = 167.5
+offset_left = -87.0
+offset_top = 2.0
+offset_right = 89.0
+offset_bottom = 177.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("2_tmoo5")
+theme = ExtResource("3_wtf3w")
 theme_override_font_sizes/font_size = 128
 text = "🧺"
 vertical_alignment = 1
 
-[node name="snd_card_slot" type="AudioStreamPlayer2D" parent="trash_can"]
-position = Vector2(105, 960)
-stream = ExtResource("3_q6pxc")
+[node name="Button" type="Button" parent="trash_can"]
+layout_mode = 0
+offset_left = -65.0
+offset_top = 9.0
+offset_right = 66.0
+offset_bottom = 148.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ltfw8")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_4inco")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ql8bx")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_icnpv")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_333iw")
+
+[node name="sfx" type="AudioStreamPlayer2D" parent="trash_can"]
+stream = ExtResource("4_iavio")
 
 [node name="request_cards" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -194,18 +215,22 @@ libraries = {
 
 [node name="card_request_spawner" type="Timer" parent="."]
 wait_time = 5.0
-autostart = true
+
+[node name="snd_spawn_request" type="AudioStreamPlayer" parent="card_request_spawner"]
+stream = ExtResource("7_m3xia")
 
 [node name="card_number_spawner" type="Timer" parent="."]
 wait_time = 8.0
-autostart = true
+
+[node name="snd_spawn_number" type="AudioStreamPlayer" parent="card_number_spawner"]
+stream = ExtResource("7_5jw8b")
 
 [node name="round_progress_bar" type="ProgressBar" parent="."]
 offset_left = 10.0
 offset_top = 1047.0
 offset_right = 1910.0
 offset_bottom = 1070.0
-theme = ExtResource("2_tmoo5")
+theme = ExtResource("3_wtf3w")
 value = 100.0
 show_percentage = false
 script = ExtResource("4_fabr2")
@@ -214,18 +239,11 @@ script = ExtResource("4_fabr2")
 wait_time = 120.0
 one_shot = true
 
-[node name="snd_card_1" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("7_ty2f7")
-
-[node name="game" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("8_bhv4q")
-volume_db = -5.0
-
 [node name="pause_menu" type="Control" parent="."]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 0
-theme = ExtResource("2_tmoo5")
+theme = ExtResource("3_wtf3w")
 script = ExtResource("10_x0b16")
 
 [node name="pause" type="Button" parent="pause_menu"]
@@ -234,6 +252,15 @@ offset_left = 1802.0
 offset_top = 5.0
 offset_right = 1915.0
 offset_bottom = 118.0
+script = ExtResource("8_lkpqg")
+
+[node name="Label" type="Label" parent="pause_menu/pause"]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 8.0
+offset_right = 81.0
+offset_bottom = 111.0
+theme_type_variation = &"LabelButton"
 text = "||"
 
 [node name="paused_stuff" type="Control" parent="pause_menu"]
@@ -241,6 +268,7 @@ visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+metadata/_edit_group_ = true
 
 [node name="ColorRect" type="ColorRect" parent="pause_menu/paused_stuff"]
 layout_mode = 0
@@ -256,22 +284,41 @@ offset_left = 723.0
 offset_top = 211.0
 offset_right = 1198.0
 offset_bottom = 849.0
-metadata/_edit_group_ = true
 
 [node name="Label" type="Label" parent="pause_menu/paused_stuff/buttons"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 128
+theme_type_variation = &"LabelTitle"
 text = "Paused"
 
 [node name="continue" type="Button" parent="pause_menu/paused_stuff/buttons"]
+custom_minimum_size = Vector2(475, 123)
 layout_mode = 2
 size_flags_vertical = 6
+script = ExtResource("8_lkpqg")
+
+[node name="Label" type="Label" parent="pause_menu/paused_stuff/buttons/continue"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 14.0
+offset_right = 402.0
+offset_bottom = 117.0
+theme_type_variation = &"LabelButton"
 text = "Continue"
 
 [node name="exit" type="Button" parent="pause_menu/paused_stuff/buttons"]
+custom_minimum_size = Vector2(475, 123)
 layout_mode = 2
 size_flags_vertical = 6
+script = ExtResource("8_lkpqg")
+
+[node name="Label" type="Label" parent="pause_menu/paused_stuff/buttons/exit"]
+layout_mode = 0
+offset_left = 161.0
+offset_top = 14.0
+offset_right = 314.0
+offset_bottom = 117.0
+theme_type_variation = &"LabelButton"
 text = "Exit"
 
 [node name="round_summary_menu" type="Node2D" parent="."]
@@ -284,7 +331,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-theme = ExtResource("2_tmoo5")
+theme = ExtResource("3_wtf3w")
 
 [node name="ColorRect" type="ColorRect" parent="round_summary_menu/stuff"]
 layout_mode = 0
@@ -301,35 +348,59 @@ offset_top = 211.0
 offset_right = 1328.0
 offset_bottom = 887.0
 alignment = 1
-metadata/_edit_group_ = true
 
 [node name="Label" type="Label" parent="round_summary_menu/stuff/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 128
+theme_type_variation = &"LabelTitle"
 text = "Round End"
 horizontal_alignment = 1
 
 [node name="points" type="Label" parent="round_summary_menu/stuff/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 64
+theme_type_variation = &"LabelPoints"
 text = "Points: "
 horizontal_alignment = 1
 
 [node name="restart" type="Button" parent="round_summary_menu/stuff/VBoxContainer"]
+custom_minimum_size = Vector2(735, 123)
 layout_mode = 2
 size_flags_vertical = 6
+script = ExtResource("8_lkpqg")
+
+[node name="Label" type="Label" parent="round_summary_menu/stuff/VBoxContainer/restart"]
+layout_mode = 0
+offset_left = 220.0
+offset_top = 14.0
+offset_right = 515.0
+offset_bottom = 117.0
+theme_type_variation = &"LabelButton"
 text = "Restart"
 
 [node name="end" type="Button" parent="round_summary_menu/stuff/VBoxContainer"]
+custom_minimum_size = Vector2(735, 123)
 layout_mode = 2
 size_flags_vertical = 6
+script = ExtResource("8_lkpqg")
+
+[node name="Label" type="Label" parent="round_summary_menu/stuff/VBoxContainer/end"]
+layout_mode = 0
+offset_left = 297.0
+offset_top = 14.0
+offset_right = 438.0
+offset_bottom = 117.0
+theme_type_variation = &"LabelButton"
 text = "End"
 
+[node name="bg_music" type="AudioStreamPlayer" parent="."]
+volume_db = -5.0
+
+[connection signal="remove_cards" from="trash_can" to="." method="_on_trash_can_remove_cards"]
 [connection signal="mouse_entered" from="trash_can/Area2D" to="trash_can" method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="trash_can/Area2D" to="trash_can" method="_on_area_2d_mouse_exited"]
-[connection signal="timeout" from="card_request_spawner" to="." method="_on_card_spawner_timeout"]
-[connection signal="timeout" from="card_number_spawner" to="." method="_on_card_number_spawner_timeout"]
+[connection signal="pressed" from="trash_can/Button" to="trash_can" method="_on_button_pressed"]
+[connection signal="timeout" from="card_request_spawner" to="." method="_on_request_spawner_timeout"]
+[connection signal="timeout" from="card_number_spawner" to="." method="_on_number_spawner_timeout"]
 [connection signal="timer_finished" from="round_progress_bar" to="." method="_on_round_progress_bar_timer_finished"]
 [connection signal="timeout" from="round_progress_bar/Timer" to="round_progress_bar" method="_on_timer_timeout"]
 [connection signal="exit" from="pause_menu" to="." method="_on_pause_menu_exit"]

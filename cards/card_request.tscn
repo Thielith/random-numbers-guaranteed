@@ -1,13 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://c0sm87etdypba"]
+[gd_scene load_steps=19 format=3 uid="uid://c0sm87etdypba"]
 
+[ext_resource type="Theme" uid="uid://o5p7cglq6qn" path="res://cards/theme_master.tres" id="1_qfr7n"]
 [ext_resource type="Script" path="res://cards/card_request.gd" id="1_uc1q4"]
-[ext_resource type="StyleBox" uid="uid://br701bdfb6aln" path="res://cards/theme_background_yellow.tres" id="3_asota"]
 [ext_resource type="Script" path="res://cards/error_panel.gd" id="3_qehet"]
-[ext_resource type="Theme" uid="uid://o5p7cglq6qn" path="res://cards/theme_card.tres" id="3_yq37e"]
 [ext_resource type="Script" path="res://cards/ProgressBar.gd" id="5_dwhbl"]
-[ext_resource type="AudioStream" uid="uid://d1hgxkcql3itk" path="res://sounds/snd_button_0.mp3" id="6_6e2ls"]
-[ext_resource type="AudioStream" uid="uid://dalfryh2ppojr" path="res://sounds/snd_card_0.mp3" id="7_hnexp"]
-[ext_resource type="AudioStream" uid="uid://bv7bw4kouxrs1" path="res://sounds/snd_ding.mp3" id="8_e7pjm"]
+[ext_resource type="AudioStream" uid="uid://d1hgxkcql3itk" path="res://sounds/snd_button_0.mp3" id="6_uiq1i"]
 
 [sub_resource type="Animation" id="Animation_bn08d"]
 length = 0.001
@@ -34,7 +31,7 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
+"transitions": PackedFloat32Array(0.5, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
@@ -99,41 +96,65 @@ _data = {
 "showPopup": SubResource("Animation_yehhx")
 }
 
-[sub_resource type="Animation" id="Animation_5icgu"]
+[sub_resource type="Animation" id="Animation_qa5pw"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Button:position")
+tracks/0/path = NodePath(".:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(276, 0)]
+"values": [Vector2(271, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_c3gcx"]
+[sub_resource type="Animation" id="Animation_hrjw6"]
 resource_name = "hide"
 length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Button:position")
+tracks/0/path = NodePath(".:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(0.5, 1),
 "update": 0,
-"values": [Vector2(276, 0), Vector2(218, 0)]
+"values": [Vector2(271, 0), Vector2(217, 0)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_27qgy"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y08of"]
 _data = {
-"RESET": SubResource("Animation_5icgu"),
-"hide": SubResource("Animation_c3gcx")
+"RESET": SubResource("Animation_qa5pw"),
+"hide": SubResource("Animation_hrjw6")
 }
 
 [sub_resource type="Animation" id="Animation_kco2a"]
@@ -200,7 +221,7 @@ tracks/4/keys = {
 }
 tracks/5/type = "value"
 tracks/5/imported = false
-tracks/5/enabled = false
+tracks/5/enabled = true
 tracks/5/path = NodePath("popup_panel:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
@@ -208,63 +229,51 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 178)]
+"values": [Vector2(0, 196)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Button:position")
+tracks/6/path = NodePath("card:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(276, 0)]
+"values": [Vector2(0, 0)]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("card:position")
+tracks/7/path = NodePath("strike_display:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(281, 65)]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("strike_display:position")
+tracks/8/path = NodePath("popup_panel:visible")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(281, 65)]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = false
-tracks/9/path = NodePath("popup_panel:visible")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
 }
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("Button:visible")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Button:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -345,48 +354,48 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.9, 0.95),
 "transitions": PackedFloat32Array(0, 1, 1),
 "update": 0,
-"values": [Vector2(0, 178), Vector2(0, 181), Vector2(0, 178)]
+"values": [Vector2(0, 196), Vector2(0, 199), Vector2(0, 196)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Button:position")
+tracks/6/path = NodePath("card:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0, 0.9, 0.95),
 "transitions": PackedFloat32Array(0, 1, 1),
 "update": 0,
-"values": [Vector2(276, 0), Vector2(276, 3), Vector2(276, 0)]
+"values": [Vector2(0, 0), Vector2(0, 3), Vector2(0, 0)]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("card:position")
+tracks/7/path = NodePath("strike_display:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0, 0.9, 0.95),
 "transitions": PackedFloat32Array(0, 1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, 3), Vector2(0, 0)]
+"values": [Vector2(281, 65), Vector2(281, 68), Vector2(281, 65)]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("strike_display:position")
+tracks/8/path = NodePath("popup_panel:visible")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0, 0.9, 0.95),
-"transitions": PackedFloat32Array(0, 1, 1),
-"update": 0,
-"values": [Vector2(281, 65), Vector2(281, 68), Vector2(281, 65)]
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("popup_panel:visible")
+tracks/9/path = NodePath("Button:visible")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -395,39 +404,13 @@ tracks/9/keys = {
 "update": 1,
 "values": [false]
 }
-tracks/10/type = "value"
+tracks/10/type = "method"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("Button:visible")
+tracks/10/path = NodePath(".")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/11/type = "method"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath(".")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
-"times": PackedFloat32Array(0.9),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"emitRemoveSignal"
-}]
-}
-tracks/12/type = "method"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath(".")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
 "times": PackedFloat32Array(0.5),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -445,12 +428,13 @@ _data = {
 [node name="card_request" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 281.0
+offset_left = 374.0
+offset_right = 655.0
 offset_bottom = 182.0
 pivot_offset = Vector2(140, 91)
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme = ExtResource("3_yq37e")
+theme = ExtResource("1_qfr7n")
 script = ExtResource("1_uc1q4")
 
 [node name="popup_panel" type="Panel" parent="."]
@@ -458,8 +442,7 @@ layout_mode = 0
 offset_top = 196.0
 offset_right = 281.0
 offset_bottom = 238.0
-theme = ExtResource("3_yq37e")
-theme_override_styles/panel = ExtResource("3_asota")
+theme = ExtResource("1_qfr7n")
 script = ExtResource("3_qehet")
 
 [node name="Label" type="Label" parent="popup_panel"]
@@ -468,7 +451,7 @@ offset_left = 5.0
 offset_top = 6.0
 offset_right = 276.0
 offset_bottom = 36.0
-theme = ExtResource("3_yq37e")
+theme = ExtResource("1_qfr7n")
 text = "Value to low"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -487,51 +470,46 @@ wait_time = 15.0
 one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="popup_panel/ProgressBar"]
+autoplay = "RESET"
 libraries = {
 "": SubResource("AnimationLibrary_0jlpa")
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="popup_panel"]
 root_node = NodePath("../..")
+autoplay = "RESET"
 libraries = {
 "": SubResource("AnimationLibrary_101ti")
 }
 
+[node name="Timer" type="Timer" parent="popup_panel"]
+
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 276.0
-offset_right = 333.0
+offset_left = 271.0
+offset_right = 334.0
 offset_bottom = 57.0
-theme = ExtResource("3_yq37e")
-
-[node name="snd_button" type="AudioStreamPlayer2D" parent="Button"]
-position = Vector2(29, 25)
-stream = ExtResource("6_6e2ls")
-attenuation = 1.23114
-
-[node name="Label" type="Label" parent="Button"]
-layout_mode = 0
-offset_left = 5.0
-offset_top = 5.0
-offset_right = 52.0
-offset_bottom = 52.0
-theme_override_font_sizes/font_size = 34
+theme = ExtResource("1_qfr7n")
+theme_type_variation = &"ButtonCardRequest"
 text = "✔"
-horizontal_alignment = 1
-vertical_alignment = 1
+alignment = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Button"]
-root_node = NodePath("../..")
+autoplay = "RESET"
 libraries = {
-"": SubResource("AnimationLibrary_27qgy")
+"": SubResource("AnimationLibrary_y08of")
 }
+
+[node name="snd_click" type="AudioStreamPlayer2D" parent="Button"]
+position = Vector2(-271, 0)
+stream = ExtResource("6_uiq1i")
 
 [node name="card" type="Panel" parent="."]
 layout_mode = 0
 offset_right = 281.0
 offset_bottom = 238.0
 size_flags_horizontal = 4
-theme = ExtResource("3_yq37e")
+theme = ExtResource("1_qfr7n")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="card"]
 layout_mode = 0
@@ -555,10 +533,8 @@ alignment = 1
 [node name="footer" type="Label" parent="card/VBoxContainer"]
 custom_minimum_size = Vector2(0, 46)
 layout_mode = 2
-theme_type_variation = &"HeaderSmall"
-theme_override_font_sizes/font_size = 18
-text = "High damage in a RPG
-with paper aesthetics"
+theme_type_variation = &"Footer"
+text = "High damage in a RPG, ranging from 4-9"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
@@ -573,8 +549,6 @@ theme_override_font_sizes/font_size = 34
 horizontal_alignment = 1
 autowrap_mode = 1
 
-[node name="popupTimer" type="Timer" parent="."]
-
 [node name="remove_anim_stuff" type="Control" parent="."]
 anchors_preset = 0
 
@@ -585,23 +559,19 @@ layout_mode = 0
 offset_top = -73.0
 offset_right = 149.0
 offset_bottom = -3.0
-theme = ExtResource("3_yq37e")
+theme = ExtResource("1_qfr7n")
+theme_type_variation = &"LabelReturn"
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 48
 text = "return"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "RESET"
 libraries = {
 "": SubResource("AnimationLibrary_vp80o")
 }
 
-[node name="snd_card_swipe" type="AudioStreamPlayer2D" parent="."]
-position = Vector2(140, 105)
-stream = ExtResource("7_hnexp")
-
-[node name="snd_ding" type="AudioStreamPlayer2D" parent="."]
-position = Vector2(140, 105)
-stream = ExtResource("8_e7pjm")
+[node name="sfx_result" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(140, 118)
 
 [connection signal="timeout" from="popup_panel/ProgressBar/Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

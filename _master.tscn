@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bixd25c7d0g4n"]
 
 [ext_resource type="Script" path="res://_master.gd" id="1_7lhh7"]
-[ext_resource type="PackedScene" uid="uid://g6nhj8bg2nyg" path="res://menus/title_screen/title_screen.tscn" id="2_ku5l5"]
+[ext_resource type="PackedScene" uid="uid://c7wd8fd3c41oh" path="res://boot/boot_screen.tscn" id="2_1ojfs"]
 
 [node name="_master" type="Node2D"]
 texture_filter = 2
@@ -15,4 +15,6 @@ offset_right = 1983.0
 offset_bottom = 1141.0
 color = Color(0.105882, 0.121569, 0.129412, 1)
 
-[node name="title_screen" parent="." instance=ExtResource("2_ku5l5")]
+[node name="boot_screen" parent="." instance=ExtResource("2_1ojfs")]
+
+[connection signal="finished_boot" from="boot_screen" to="." method="_on_boot_screen_finished_boot"]

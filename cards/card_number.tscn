@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://bgdc3x6mdodqv"]
 
 [ext_resource type="Script" path="res://cards/card_number.gd" id="1_6d3wm"]
-[ext_resource type="Theme" uid="uid://o5p7cglq6qn" path="res://cards/theme_card.tres" id="1_hasbg"]
-[ext_resource type="AudioStream" uid="uid://dmui6oom7dln4" path="res://sounds/snd_card_slot.mp3" id="4_fd4dk"]
+[ext_resource type="Theme" uid="uid://o5p7cglq6qn" path="res://cards/theme_master.tres" id="2_th2g2"]
+[ext_resource type="AudioStream" uid="uid://dmui6oom7dln4" path="res://sounds/snd_card_num_place_slot.mp3" id="3_3k3ve"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_emw31"]
 size = Vector2(14, 14)
@@ -17,21 +17,21 @@ size_flags_horizontal = 6
 size_flags_vertical = 3
 script = ExtResource("1_6d3wm")
 
-[node name="border" type="Panel" parent="."]
+[node name="card" type="Panel" parent="."]
 layout_mode = 0
 offset_left = -39.0
 offset_right = 40.0
 offset_bottom = 121.0
 pivot_offset = Vector2(39, 60)
-theme = ExtResource("1_hasbg")
+theme = ExtResource("2_th2g2")
 
-[node name="number" type="Label" parent="border"]
+[node name="number" type="Label" parent="card"]
 layout_mode = 0
 offset_left = 12.0
 offset_top = 21.0
 offset_right = 67.0
 offset_bottom = 99.0
-theme_override_font_sizes/font_size = 75
+theme_type_variation = &"LabelCardNumber"
 text = "0"
 
 [node name="slot_snap_area" type="Area2D" parent="."]
@@ -57,10 +57,11 @@ shape = SubResource("RectangleShape2D_bgmjg")
 wait_time = 2.0
 one_shot = true
 
-[node name="snd_card_pickup" type="AudioStreamPlayer2D" parent="."]
-position = Vector2(0, 61)
-stream = ExtResource("4_fd4dk")
+[node name="snd_pickup" type="AudioStreamPlayer2D" parent="."]
+visible = false
+position = Vector2(1, 61)
+stream = ExtResource("3_3k3ve")
 
-[connection signal="resized" from="border" to="." method="_on_border_resized"]
+[connection signal="resized" from="card" to="." method="_on_border_resized"]
 [connection signal="mouse_entered" from="click_area" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="click_area" to="." method="_on_area_2d_mouse_exited"]

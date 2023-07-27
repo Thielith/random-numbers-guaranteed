@@ -9,8 +9,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	lifeTimePercentage = ($Timer.time_left / $Timer.wait_time)
-	value = lifeTimePercentage * 100
+	if not $Timer.is_stopped():
+		lifeTimePercentage = ($Timer.time_left / $Timer.wait_time)
+		value = lifeTimePercentage * 100
 
 func stop():
 	$Timer.stop()

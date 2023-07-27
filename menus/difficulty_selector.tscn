@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://lcp5f4yks1wd"]
+
+[ext_resource type="Theme" uid="uid://o5p7cglq6qn" path="res://cards/theme_master.tres" id="1_gx2gt"]
+[ext_resource type="Script" path="res://menus/difficulty_selector.gd" id="2_v10a6"]
+[ext_resource type="Script" path="res://menus/button.gd" id="3_gb57b"]
+
+[node name="difficulty_selector" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+theme = ExtResource("1_gx2gt")
+script = ExtResource("2_v10a6")
+
+[node name="exit" type="Button" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 145.0
+offset_bottom = 145.0
+script = ExtResource("3_gb57b")
+
+[node name="Label" type="Label" parent="exit"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 9.0
+offset_right = 92.0
+offset_bottom = 112.0
+theme_type_variation = &"LabelButton"
+text = "←"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 387.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+alignment = 1
+metadata/_edit_group_ = true
+
+[connection signal="pressed" from="exit" to="." method="on_exit_button_pressed"]

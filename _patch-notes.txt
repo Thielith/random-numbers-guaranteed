@@ -1,3 +1,5 @@
+
+v1.0.0
 changes:
 - Request Cards go to random pre-determined positions now so they don't overlap with eachother
 - made requests on Request Cards clearer
@@ -7,8 +9,19 @@ changes:
 - number cards put into Request Card slots now move with the slot
 - Request Cards on timeout now run the same checks as if the player clicked the submit button (i.e if you fill a Request Card and let it timeout, it will still award points if the number is correct)
 - made Request Card description text a bit bigger
+- new boot animation and title
+- updated instructions to not be just text
+- new difficulties: classic, easy, normal, hard
+	- Classic uses the original settings the final game jam build had, rest can be seen in difficulties.json
+        - each difficulty comes with its own music track
+- removed button borders and made them look 3D-ish
+- new transition effect when going between menus
+- new sfx
+- clicking the trash can now bins half of the cards in your hand
+- added quit button to title screen
 
 bug fixes:
 - (maybe) fixed a rare bug where game would crash after deleting a Request Card with a glitched number card state
 - (maybe) fixed a rare bug where a Request Card slot would have a card without showing it
 - fixed a bug where putting a number card into a slot and moving the mouse away quickly would result in a glitched number card
+- did a general passthough of the code to make it less messy

@@ -3,34 +3,45 @@ extends Node2D
 var gameScene = load("res://game.tscn")
 var titleScreenScene = load("res://menus/title_screen.tscn")
 var instructionsScene = load("res://menus/instructions.tscn")
-var loadedScreen :  Node2D
+var difficultyScene = load("res://menus/difficulty_selector.tscn")
+@onready var loadedScreen = $boot_screen
 
-var overlayScreen : Node2D = null
+func loadGame():
+	await loadScene(gameScene)
+	loadedScreen.connect("end_game", loadMainMenu)
+	loadedScreen.connect("restart_game", loadGame)
 
-func _ready():
-	loadedScreen = $title_screen
-	loadedScreen.connect("play", on_play_pressed)
-	loadedScreen.connect("instructions", on_instructions_pressed)
+func loadMainMenu():
+	await loadScene(titleScreenScene)
+	loadedScreen.connect("play", loadDifficultySelection)
+	loadedScreen.connect("instructions", loadInstructions)
+	
+func loadInstructions():
+	await loadScene(instructionsScene)
+	loadedScreen.connect("exit", loadMainMenu)
 
-func on_play_pressed():
+func loadDifficultySelection():
+	await loadScene(difficultyScene)
+	loadedScreen.connect("start_game", loadGame)
+	loadedScreen.connect("exit", loadMainMenu)
+	
+func loadScene(scene : PackedScene):
+	var TW = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUINT)
+	TW.tween_property(loadedScreen, "modulate:a", 0, 0.1)
+	await TW.finished
+	
 	loadedScreen.queue_free()
-	loadedScreen = gameScene.instantiate()
-	loadedScreen.connect("restart_game", on_play_pressed)
-	loadedScreen.connect("end_game", on_game_exit)
+	loadedScreen = scene.instantiate()
 	add_child(loadedScreen)
+	
+	TW = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUINT)
+	loadedScreen.modulate.a = 0
+	TW.tween_property(loadedScreen, "modulate:a", 1.0, 0.1)
 
-func on_instructions_pressed():
-	overlayScreen = instructionsScene.instantiate()
-	overlayScreen.connect("exit", on_instructions_exit)
-	add_child(overlayScreen)
-
-func on_game_exit():
+func _on_boot_screen_finished_boot():
 	loadedScreen.queue_free()
 	loadedScreen = titleScreenScene.instantiate()
-	loadedScreen.connect("play", on_play_pressed)
-	loadedScreen.connect("instructions", on_instructions_pressed)
+	loadedScreen.fadeInButtons()
 	add_child(loadedScreen)
-
-func on_instructions_exit():
-	overlayScreen.queue_free()
-	overlayScreen = null
+	loadedScreen.connect("play", loadDifficultySelection)
+	loadedScreen.connect("instructions", loadInstructions)

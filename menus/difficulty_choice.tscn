@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://cu30vk2l5t6o6"]
+
+[ext_resource type="Theme" uid="uid://o5p7cglq6qn" path="res://cards/theme_master.tres" id="1_rqpkq"]
+[ext_resource type="Script" path="res://menus/difficulty_choice.gd" id="2_f0fnp"]
+[ext_resource type="Script" path="res://menus/button.gd" id="3_a0h7a"]
+
+[node name="difficulty" type="HBoxContainer"]
+theme = ExtResource("1_rqpkq")
+script = ExtResource("2_f0fnp")
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(319, 123)
+layout_mode = 2
+size_flags_horizontal = 0
+keep_pressed_outside = true
+script = ExtResource("3_a0h7a")
+
+[node name="Label" type="Label" parent="Button"]
+custom_minimum_size = Vector2(319, 103)
+layout_mode = 0
+offset_right = 319.0
+offset_bottom = 103.0
+theme_type_variation = &"LabelButton"
+text = "Classic"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="space" type="Label" parent="."]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="description" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_type_variation = &"LabelDescription"
+text = "asdawdasdwa"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
